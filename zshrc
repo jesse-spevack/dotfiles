@@ -6,6 +6,7 @@ ZSH_THEME=""
 plugins=(
   git
   zsh-osx-keychain
+  vscode
 )
 
 # Source ZSH after plugins load
