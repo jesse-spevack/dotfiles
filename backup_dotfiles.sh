@@ -2,7 +2,7 @@
 
 # create a timestamp alias for the commit message
 timestamp() {
-  date +"%d-%m-%Y @ %T"
+  date +"%Y-%m-%d @ %T"
 }
 
 # files to backup

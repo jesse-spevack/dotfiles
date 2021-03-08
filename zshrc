@@ -11,6 +11,7 @@ plugins=(
 
 # Source ZSH after plugins load
 source $ZSH/oh-my-zsh.sh
+
 # ZSH aliases
 alias zshconfig="code ~/.zshrc"
 alias source!="source ~/.zshrc"
@@ -29,7 +30,24 @@ prompt pure
 
 # Utility Aliases
 alias ls="ls -laGFh"
+
+# Git
 alias gcm="git commit --amend --no-edit"
+
+# Bundler
+alias be="bundle exec"
+alias bers="bundle exec rspec --format documentation"
+
+# Jekyll
+alias jeks="jekyll serve -w --force_polling"
+
+# Postgres
+alias pgst="pg_ctl start"
+alias pgsp="pg_ctl stop"
+
+# Rails
+alias rsp="be rails server -p"
+alias web_server="./bin/webpack-dev-server"
 
 # Ibotta Aliases
 alias reset_tools="ssh-keygen -R tools.ibotta.com"
@@ -54,7 +72,7 @@ alias oncall-fix="saml-monolith ibotta_cli application deploy_api_server_product
 alias oncall-migrate="saml-monolith ./bin/drake db:migration:prod"
 alias oncall-rollback="saml-monolith ibotta_cli application rollback_api_server_production"
 
-# Aliases - ENV Variables
+# ENV Variables
 # https://github.com/onyxraven/zsh-osx-keychain
 export GITHUB_API_TOKEN="$(keychain-environment-variable GITHUB_API_TOKEN)"
 export GEM_REPO_LOGIN="$(keychain-environment-variable GEM_REPO_LOGIN)"
