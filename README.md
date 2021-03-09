@@ -1,7 +1,6 @@
-# dotfiles
-Jesse Spevack's Dotfiles
+# Jesse Spevack's Dotfiles
 
-- Handle secret info with: [this](https://github.com/onyxraven/zsh-osx-keychain)
+Handle secret info with: [this](https://github.com/onyxraven/zsh-osx-keychain)
 
 Enable the .sh to run by:
 1. Open crontab `crontab -e`
