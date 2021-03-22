@@ -75,10 +75,10 @@ alias oncall-rollback="saml-monolith ibotta_cli application rollback_api_server_
 # ENV Variables
 # https://github.com/onyxraven/zsh-osx-keychain
 export GITHUB_API_TOKEN="$(keychain-environment-variable GITHUB_API_TOKEN)"
-export GEM_REPO_LOGIN="$(keychain-environment-variable GEM_REPO_LOGIN)"
+export NPM_BASE="https://ibdolphin.jfrog.io/ibdolphin/api/npm"
+export NPM_REPO_LOGIN="readonly:$(keychain-environment-variable NPM_REPO_LOGIN)"
+export GEM_REPO_LOGIN="readonly:$(keychain-environment-variable GEM_REPO_LOGIN)"
 export MVN_REPO_LOGIN="$GEM_REPO_LOGIN"
-export NPM_REPO_LOGIN="$GEM_REPO_LOGIN"
-export MASTER_GENERATOR_LOGIN="$(keychain-environment-variable MASTER_GENERATOR_LOGIN)"
 
 # SAML AWS Quality of Life
 # https://ibotta.atlassian.net/wiki/spaces/TT/pages/451510679/Getting+started+with+saml2aws  
