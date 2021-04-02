@@ -4,7 +4,6 @@ export ZSH="$HOME/.oh-my-zsh"
 # ZSH Thenes and plugins
 ZSH_THEME=""
 plugins=(
-  git
   zsh-osx-keychain
   vscode
 )
@@ -32,7 +31,76 @@ prompt pure
 alias ls="ls -laGFh"
 
 # Git
-alias gcm="git commit --amend --no-edit"
+
+# Heavily borrowed from https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/git/git.plugin.zsh
+# But only including things I use.
+# Check if main exists and use instead of master
+function git_main_branch() {
+  command git rev-parse --git-dir &>/dev/null || return
+  local branch
+  for branch in main trunk; do
+    if command git show-ref -q --verify refs/heads/$branch; then
+      echo $branch
+      return
+    fi
+  done
+  echo master
+}
+
+alias ga="git add"
+alias gaa="git add --all"
+alias gapa="git add --patch"
+
+alias gb="git branch"
+alias gba="git branch -a"
+alias gbD="git branch -D"
+
+alias gc!="git commit --amend"
+alias gcn!="git commit --amend --no-edit"
+alias gcmsg="git commit -m"
+alias gcm="git checkout $(git_main_branch)"
+alias gcd="git checkout develop"
+alias gcb="git checkout -b"
+alias gco="git checkout"
+alias gcp="git cherry-pick"
+alias gcpa="git cherry-pick --abort"
+alias gcpc="git cherry-pick --continue"
+
+alias gd="git diff"
+alias gds="git diff --staged"
+
+alias gf="git fetch"
+
+alias gl="git pull"
+
+alias gm="git merge"
+alias gmom="git merge $(git_main_branch)"
+
+alias gp="git push"
+alias gpf!="git push --force"
+
+alias gr="git remote"
+alias gra="git remote add"
+alias grb="git rebase"
+alias grba="git rebase --abort"
+alias grbc="git rebase --continue"
+alias grbd="git rebase develop"
+alias grbi="git rebase -i"
+alias grbm="git rebase $(git_main_branch)"
+alias grbs="git rebase --skip"
+alias grm="git rm"
+alias grs="git restore"
+alias grst="git restore --staged"
+alias grsh1="git restore --soft HEAD~1"
+alias grv="git remote -v"
+
+alias gst="git status"
+alias gsps="git show --pretty=short --show-signature"
+
+alias gstaa="git stash apply"
+alias gstc="git stash clear"
+alias gstl="git stash clear"
+alias gstall="git stash --all"
 
 # Bundler
 alias be="bundle exec"
