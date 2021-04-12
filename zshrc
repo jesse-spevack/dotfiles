@@ -139,6 +139,7 @@ alias oncall-verify="saml-monolith ibotta_cli application verify_revisions api-s
 alias oncall-fix="saml-monolith ibotta_cli application deploy_api_server_production --fix"
 alias oncall-migrate="saml-monolith ./bin/drake db:migration:prod"
 alias oncall-rollback="saml-monolith ibotta_cli application rollback_api_server_production"
+alias deploy-stage="saml-monolith ibotta_cli application deploy api-server name:mcnoche --revision=$(git branch | grep \* | cut -d ' ' -f2)"
 
 # ENV Variables
 # https://github.com/onyxraven/zsh-osx-keychain
