@@ -107,7 +107,7 @@ alias be="bundle exec"
 alias bers="bundle exec rspec --format documentation"
 
 # Jekyll
-alias jeks="jekyll serve -w --force_polling"
+alias jeks="bundle exec jekyll serve -w --force_polling"
 
 # Postgres
 alias pgst="pg_ctl start"
