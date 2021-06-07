@@ -30,6 +30,12 @@ prompt pure
 # Utility Aliases
 alias ls="ls -laGFh"
 
+docker-power-wash() {
+    docker volume prune
+    docker container prune --filter "until=24h"
+    docker image prune -a --filter "until=24h"
+}
+
 # Git
 
 # Heavily borrowed from https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/git/git.plugin.zsh
