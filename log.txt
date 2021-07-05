@@ -1,5 +1,7 @@
-job started: 2021-06-28 @ 09:00:00
-Running Git commands: 2021-06-28 @ 09:00:00
-From github.com:jesse-spevack/dotfiles
- * branch            main       -> FETCH_HEAD
-Already up to date.
+job started: 2021-07-05 @ 09:00:00
+Running Git commands: 2021-07-05 @ 09:00:00
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
