@@ -136,6 +136,7 @@ alias dca="drake console:admin"
 # SAML
 alias saml-login="saml2aws login --role=arn:aws:iam::$(keychain-environment-variable AWS_ACCOUNT_ID):role/PlatformEngineerLogin --skip-prompt --session-duration=43200 --force"
 alias saml-monolith="saml2aws exec --exec-profile monolith --"
+alias saml-staging="saml2aws exec --exec-profile staging --"
 alias saml-k8s="saml2aws exec --exec-profile prod-k8s --"
 
 # On call items
