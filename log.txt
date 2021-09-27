@@ -1,7 +1,5 @@
-job started: 2021-09-20 @ 09:00:01
-Running Git commands: 2021-09-20 @ 09:00:01
-git@github.com: Permission denied (publickey).
-fatal: Could not read from remote repository.
-
-Please make sure you have the correct access rights
-and the repository exists.
+job started: 2021-09-27 @ 09:00:00
+Running Git commands: 2021-09-27 @ 09:00:00
+From github.com:jesse-spevack/dotfiles
+ * branch            main       -> FETCH_HEAD
+Already up to date.
