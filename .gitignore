@@ -1,0 +1,23 @@
+# Old backups
+old/
+
+# Neovim generated files
+nvim/.config/nvim/lazy-lock.json
+nvim/.config/nvim/lazyvim.json
+
+# Tmux plugin manager plugins (managed by tpm)
+tmux/.config/tmux/plugins/
+
+# SSH keys and sensitive files
+ssh/.ssh/id_*
+ssh/.ssh/*.pem
+ssh/.ssh/*.key
+ssh/.ssh/known_hosts
+
+# macOS
+.DS_Store
+
+# Temporary files
+*.swp
+*.swo
+*~

@@ -1,0 +1,225 @@
+# Source the reset configuration for custom keybindings
+source-file ~/.config/tmux/tmux.reset.conf
+
+# Terminal settings
+set-option -g default-terminal 'screen-256color'
+set-option -g terminal-overrides ',xterm-256color:RGB'
+
+# Core tmux behavior
+set -g prefix ^A                 # Ctrl+A prefix (instead of Ctrl+B)
+set -g base-index 1              # Windows start at 1, not 0
+set -g detach-on-destroy off     # Don't exit tmux when closing last session
+set -g escape-time 0             # Zero escape time for vim integration
+set -g history-limit 1000000     # Massive 1M line scrollback buffer
+set -g renumber-windows on       # Auto-renumber windows when one closes
+set -g set-clipboard on          # System clipboard integration
+set -g status-position top       # Status bar at top (macOS style)
+setw -g mode-keys vi             # Vim-style navigation in copy mode
+
+# Visual styling
+set -g pane-active-border-style 'fg=magenta,bg=default'  # Magenta active borders
+set -g pane-border-style 'fg=brightblack,bg=default'    # Subtle inactive borders
+
+# Plugin configurations
+set -g @fzf-url-fzf-options '-p 60%,30% --prompt="   " --border-label=" Open URL "'
+set -g @fzf-url-history-limit '2000'
+
+# Plugins
+set -g @plugin 'tmux-plugins/tpm'           # Plugin manager
+set -g @plugin 'omerxx/tmux-sessionx'       # Session manager with fuzzy finding
+set -g @plugin 'omerxx/tmux-floax'          # Floating panes
+set -g @plugin 'sainnhe/tmux-fzf'           # URL extraction with fzf
+set -g @plugin 'tmux-plugins/tmux-sensible'    # Sensible defaults
+set -g @plugin 'tmux-plugins/tmux-yank'        # Better copy/paste
+set -g @plugin 'tmux-plugins/tmux-resurrect'   # Session persistence
+set -g @plugin 'tmux-plugins/tmux-continuum'   # Auto-save sessions
+
+# SessionX configuration
+set -g @sessionx-bind 'o'                   # Ctrl+A + o to open session manager
+set -g @sessionx-preview-location 'right'   # Preview on the right side
+set -g @sessionx-preview-ratio '75%'        # 75% of screen for preview
+
+# Some advanced SessionX settings:
+set -g @sessionx-filter-current 'true'     # Hide current session by default
+set -g @sessionx-window-mode 'on'          # Enable window mode  
+set -g @sessionx-tree-mode 'on'            # Enable tree mode
+
+# Enhanced SessionX configuration
+set -g @sessionx-custom-paths '/Users/jesse/projects,/Users/jesse/code'
+set -g @sessionx-x-path '~/dotfiles'        # Quick access to dotfiles
+set -g @sessionx-zoxide-mode 'on'           # Zoxide integration (if you have it)
+set -g @sessionx-tmuxinator-mode 'on'       # Tmuxinator integration
+
+# Floax configuration  
+set -g @floax-bind 'p'                      # Ctrl+A + p for floating pane
+set -g @floax-width '80%'                   # 80% screen width
+set -g @floax-height '80%'                  # 80% screen height
+set -g @floax-border-color 'magenta'        # Magenta border color
+
+# Enhanced Floax settings
+set -g @floax-change-path 'true'            # Change directory in floating pane
+set -g @floax-text-color 'cyan'             # Different text color
+
+# URL extraction
+set -g @fzf-url-fzf-options '-p 60%,30% --prompt="   " --border-label=" Open URL "'
+set -g @fzf-url-history-limit '2000'        # Remember 2000 URLs
+
+# Add to your tmux.conf plugins section:
+set -g @plugin 'catppuccin/tmux'
+set -g @catppuccin_flavour 'mocha'  # or 'macchiato', 'frappe', 'latte'
+
+# Catppuccin configuration with ICONS
+set -g @catppuccin_window_left_separator ""
+set -g @catppuccin_window_right_separator " "
+set -g @catppuccin_window_middle_separator " █"
+set -g @catppuccin_window_number_position "right"
+set -g @catppuccin_window_default_fill "number"
+set -g @catppuccin_window_default_text "#W"
+set -g @catppuccin_window_current_fill "number"
+set -g @catppuccin_window_current_text "#W#{?window_zoomed_flag,(),}"
+
+# STATUS BAR WITH ICONS - This is the key part!
+set -g @catppuccin_status_modules_right "directory date_time"
+set -g @catppuccin_status_modules_left "session"
+set -g @catppuccin_status_left_separator  " "
+set -g @catppuccin_status_right_separator " "
+set -g @catppuccin_status_right_separator_inverse "no"
+set -g @catppuccin_status_fill "icon"  # This enables icons!
+set -g @catppuccin_status_connect_separator "no"
+
+# Custom icon text for modules
+set -g @catppuccin_directory_text "#{b:pane_current_path}"
+set -g @catppuccin_date_time_text "%H:%M %d-%b-%y"
+
+# Custom session text with icon
+set -g @catppuccin_session_text " #S"
+
+# If you want custom icons for the modules, you can override them:
+# Terminal/Session icon
+set -g @catppuccin_session_icon ""
+
+# Directory icon  
+set -g @catppuccin_directory_icon ""
+
+# Date/time icon
+set -g @catppuccin_date_time_icon ""
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run '~/.tmux/plugins/tpm/tpm'
+
+
+
+----
+
+# Source the reset configuration for custom keybindings
+source-file ~/.config/tmux/tmux.reset.conf
+
+# Terminal settings
+set-option -g default-terminal 'tmux-256color'
+set-option -ga terminal-overrides ',*:Tc'
+set-option -ga terminal-overrides ',*:RGB'
+set-option -as terminal-features ',*:RGB'
+
+# Core tmux behavior
+set -g prefix ^A                 # Ctrl+A prefix (instead of Ctrl+B)
+set -g base-index 1              # Windows start at 1, not 0
+set -g detach-on-destroy off     # Don't exit tmux when closing last session
+set -g escape-time 0             # Zero escape time for vim integration
+set -g history-limit 1000000     # Massive 1M line scrollback buffer
+set -g renumber-windows on       # Auto-renumber windows when one closes
+set -g set-clipboard on          # System clipboard integration
+set -g status-position top       # Status bar at top (macOS style)
+setw -g mode-keys vi             # Vim-style navigation in copy mode
+
+# Visual styling
+# set -g pane-active-border-style 'fg=magenta,bg=default'  # Magenta active borders
+# set -g pane-border-style 'fg=brightblack,bg=default'    # Subtle inactive borders
+
+# Plugin configurations
+set -g @fzf-url-fzf-options '-p 60%,30% --prompt="   " --border-label=" Open URL "'
+set -g @fzf-url-history-limit '2000'
+
+# Plugins
+set -g @plugin 'tmux-plugins/tpm'           # Plugin manager
+set -g @plugin 'omerxx/tmux-sessionx'       # Session manager with fuzzy finding
+set -g @plugin 'omerxx/tmux-floax'          # Floating panes
+set -g @plugin 'sainnhe/tmux-fzf'           # URL extraction with fzf
+set -g @plugin 'tmux-plugins/tmux-sensible'    # Sensible defaults
+set -g @plugin 'tmux-plugins/tmux-yank'        # Better copy/paste
+set -g @plugin 'tmux-plugins/tmux-resurrect'   # Session persistence
+# set -g @plugin 'tmux-plugins/tmux-continuum'   # Auto-save sessions (temporarily disabled)
+set -g @plugin 'catppuccin/tmux'
+
+# SessionX configuration
+set -g @sessionx-bind 'o'                   # Ctrl+A + o to open session manager
+set -g @sessionx-preview-location 'right'   # Preview on the right side
+set -g @sessionx-preview-ratio '75%'        # 75% of screen for preview
+
+# Some advanced SessionX settings:
+set -g @sessionx-filter-current 'true'     # Hide current session by default
+set -g @sessionx-window-mode 'on'          # Enable window mode  
+set -g @sessionx-tree-mode 'on'            # Enable tree mode
+
+# Enhanced SessionX configuration
+set -g @sessionx-custom-paths '/Users/jesse/projects,/Users/jesse/code'
+set -g @sessionx-x-path '~/dotfiles'        # Quick access to dotfiles
+set -g @sessionx-zoxide-mode 'on'           # Zoxide integration (if you have it)
+set -g @sessionx-tmuxinator-mode 'on'       # Tmuxinator integration
+
+# Floax configuration  
+set -g @floax-bind 'p'                      # Ctrl+A + p for floating pane
+set -g @floax-width '80%'                   # 80% screen width
+set -g @floax-height '80%'                  # 80% screen height
+set -g @floax-border-color 'magenta'        # Magenta border color
+
+# Enhanced Floax settings
+set -g @floax-change-path 'true'            # Change directory in floating pane
+set -g @floax-text-color 'cyan'             # Different text color
+
+# URL extraction
+set -g @fzf-url-fzf-options '-p 60%,30% --prompt="   " --border-label=" Open URL "'
+set -g @fzf-url-history-limit '2000'        # Remember 2000 URLs
+
+# Add to your tmux.conf plugins section:
+set -g @catppuccin_flavor 'mocha'  # or 'macchiato', 'frappe', 'latte'
+set -g @catppuccin_window_status_style "rounded"
+set -g @catppuccin_status_background "none"
+set -g @catppuccin_status_connect_separator "no"
+
+# Catppuccin window configuration
+set -g @catppuccin_window_left_separator ""
+set -g @catppuccin_window_right_separator " "
+set -g @catppuccin_window_middle_separator " █"
+set -g @catppuccin_window_number_position "right"
+set -g @catppuccin_window_default_fill "number"
+set -g @catppuccin_window_default_text "#W"
+set -g @catppuccin_window_current_fill "number"
+set -g @catppuccin_window_current_text "#W#{?window_zoomed_flag,(),}"
+
+# Status modules configuration
+set -g @catppuccin_status_left_separator ""
+set -g @catppuccin_status_right_separator " "
+set -g @catppuccin_status_connect_separator "no"
+set -g @catppuccin_status_fill "icon"
+
+# Custom module text
+set -g @catppuccin_directory_text "#{b:pane_current_path}"
+set -g @catppuccin_meetings_text "#($HOME/.config/tmux/scripts/cal.sh)"
+set -g @catppuccin_date_time_text "%H:%M"
+
+# Module icons (Nerd Font icons)
+set -g @catppuccin_session_icon " "
+set -g @catppuccin_directory_icon " "
+set -g @catppuccin_date_time_icon " "
+
+# Configure the actual status line with Catppuccin modules
+set -g status-right-length 100
+set -g status-left-length 100
+set -g status-left "#{E:@catppuccin_status_session}"
+set -g status-right "#{E:@catppuccin_status_directory}#{E:@catppuccin_status_date_time}"
+
+# Test nerd font icons directly (commented out to use Catppuccin icons)
+# set -g status-right " #{b:pane_current_path} | %H:%M "
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run '~/.tmux/plugins/tpm/tpm'

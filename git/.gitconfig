@@ -1,0 +1,10 @@
+# This is Git's per-user configuration file.
+[user]
+	name = Jesse Spevack
+	email = jspevack@gmail.com
+[pager]
+	branch = false
+[push]
+	autoSetupRemote = true
+[init]
+	defaultBranch = main
