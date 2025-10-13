@@ -5,8 +5,8 @@
     config = function()
       local config = require("nvim-treesitter.configs")
       config.setup({
-        ensure_installed = { "lua", "javascript", "ruby" },
         highlight = { 
+          auto_install = true,
           enable = truecolorscheme,
           additional_vim_regex_highlighting = false
         },
