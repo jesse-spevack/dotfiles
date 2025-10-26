@@ -43,19 +43,25 @@ return {
       }
       vim.lsp.enable('lua_ls')
 
-      vim.lsp.config.ruby_lsp = {
-        cmd = { 'ruby-lsp' },
-        filetypes = { 'ruby', 'eruby' },
-        root_markers = { 'Gemfile', '.git' },
-        init_options = {
-          formatter = 'auto',
-        },
-        reuse_client = function(client, config)
-          config.cmd_cwd = config.root_dir
-          return client.config.cmd_cwd == config.cmd_cwd
+      -- Ruby LSP setup - uses rubocop for formatting/linting
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = { 'ruby', 'eruby' },
+        callback = function(args)
+          local root_dir = vim.fs.root(args.buf, { 'Gemfile', '.git' })
+          if not root_dir then
+            return
+          end
+
+          vim.lsp.start({
+            name = 'ruby-lsp',
+            cmd = { 'ruby-lsp' },
+            root_dir = root_dir,
+            init_options = {
+              formatter = 'rubocop',
+            },
+          })
         end,
-      }
-      vim.lsp.enable('ruby_lsp')
+      })
 
       vim.lsp.config.ts_ls = {
         cmd = { 'typescript-language-server', '--stdio' },
