@@ -86,3 +86,4 @@ export PATH="$HOME/.npm-global/bin:$PATH"
 . "$HOME/.local/bin/env"
 
 alias claude="/Users/jesse/.claude/local/claude"
+alias lfg="claude --dangerously-skip-permissions"
