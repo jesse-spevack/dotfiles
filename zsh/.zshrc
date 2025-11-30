@@ -38,13 +38,6 @@ fpath+=("$(brew --prefix)/share/zsh/site-functions")
 # https://starship.rs
 eval "$(starship init zsh)"
 
-# Pure prompt - my beautiful theme
-# https://github.com/sindresorhus/pure#getting-started
-# https://github.com/sindresorhus/iterm2-snazzy/blob/main/readme.md
-# autoload -U promptinit; promptinit
-# zstyle :prompt:pure:git:stash show yes
-# prompt pure
-
 # Tmux
 # https://github.com/tmux/tmux/blob/master/FAQ
 # https://github.com/tmux/tmux/wiki
@@ -58,13 +51,14 @@ alias zshconfig="code ~/.zshrc"
 # Utility Aliases
 alias ls="ls -laGFh"
 
-# ENV
-export DB_USERNAME="postgres"
-export DB_PASSWORD="zkERar8kHNgVi40kVge7"
-export DB_NAME="todo-list-db"
-export DB_HOSTNAME="todo-list-db.cussvcqrstua.us-east-1.rds.amazonaws.com"
-export DB_PORT="5432"
-export DB_POOL_SIZE="10"
+# https://yazi-rs.github.io/docs/quick-start/
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/jesse/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/jesse/google-cloud-sdk/path.zsh.inc'; fi
