@@ -96,21 +96,47 @@ git commit -m "feat: add specific feature"
 
 ## Execution Handoff
 
-After saving the plan, offer execution choice:
+After saving the plan:
 
-**"Plan complete and saved to `docs/plans/<filename>.md`. Two execution options:**
+**"Plan complete and saved to `docs/plans/<filename>.md`.
 
-**1. Subagent-Driven (this session)** - I dispatch fresh subagent per task, review between tasks, fast iteration
+To execute:
+1. Open a new Claude session in the worktree
+2. Use executing-plans skill to run the plan in batches
+3. After each batch, bring the progress report back here for review"**
 
-**2. Parallel Session (separate)** - Open new session with executing-plans, batch execution with checkpoints
+## Reviewing Progress Reports
 
-**Which approach?"**
+When the user shares a progress report from the execution session:
 
-**If Subagent-Driven chosen:**
-- **REQUIRED SUB-SKILL:** Use superpowers:subagent-driven-development
-- Stay in this session
-- Fresh subagent per task + code review
+**REQUIRED:** Use the reviewing-progress skill to dispatch the progress-reviewer agent.
 
-**If Parallel Session chosen:**
-- Guide them to open new session in worktree
-- **REQUIRED SUB-SKILL:** New session uses superpowers:executing-plans
+The agent will:
+1. Compare progress against the plan
+2. Flag concerns and deviations
+3. Generate ready-to-use prompts for the execution session
+
+**Response format:**
+
+```
+## Progress Assessment
+
+**Status:** [On Track / Minor Deviations / Needs Correction / Blocked]
+
+**Tasks Reviewed:** [N of M]
+
+### What's Working Well
+- [Positive observation]
+
+### Concerns
+| Issue | Type | Description |
+|-------|------|-------------|
+
+### Prompts for Execution Session
+
+> **[Issue - Type]**
+> [Ready-to-paste prompt]
+
+### Recommendation
+[Continue to next batch / Address issues first / Pause for discussion]
+```
