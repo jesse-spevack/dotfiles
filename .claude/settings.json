@@ -1,7 +1,7 @@
 {
   "includeCoAuthoredBy": false,
   "enabledPlugins": {
-    "superpowers@superpowers-marketplace": true
+    "greptile@claude-plugins-official": true
   },
   "alwaysThinkingEnabled": true
 }
