@@ -37,7 +37,7 @@ Start by understanding the current project context, then ask questions one at a 
 **Documentation:**
 - Write the validated design to `docs/plans/YYYY-MM-DD-<topic>-design.md`
 - Use elements-of-style:writing-clearly-and-concisely skill if available
-- Commit the design document to git
+- Do not commit unless the user explicitly requests it
 
 **Implementation (if continuing):**
 - Ask: "Ready to set up for implementation?"
