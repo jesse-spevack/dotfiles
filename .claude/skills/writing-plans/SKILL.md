@@ -140,3 +140,18 @@ The agent will:
 ### Recommendation
 [Continue to next batch / Address issues first / Pause for discussion]
 ```
+
+## PR Documentation
+
+When the implementation is complete and the PR is ready to merge, add a comprehensive GitHub comment documenting:
+
+1. **The Problem** - What issue triggered this work
+2. **Root Cause** - Technical explanation of why it happened
+3. **Options Considered** - Table of alternatives with pros/cons
+4. **Decision** - Which option was chosen and why
+5. **What This Solution Does** - Before/after diagrams or explanation
+6. **Files Changed** - Summary of modifications
+
+Use `gh pr comment <number> --body "..."` to add the comment.
+
+This creates a permanent record of the investigation and decision-making process for future reference.
