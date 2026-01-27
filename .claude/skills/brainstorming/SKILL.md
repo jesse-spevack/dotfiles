@@ -7,16 +7,16 @@ description: Use when creating or developing, before writing code or implementat
 
 ## Overview
 
-Help turn ideas into fully formed designs and specs through natural collaborative dialogue.
+Help turn ideas into fully formed designs through natural collaborative dialogue, then transition smoothly into implementation.
 
-Start by understanding the current project context, then ask questions one at a time to refine the idea. Once you understand what you're building, present the design in small sections (200-300 words), checking after each section whether it looks right so far.
+Start by understanding the current project context, then ask questions one at a time to refine the idea. Once you understand what you're building, present the design in small sections, checking after each section whether it looks right so far.
 
 ## The Process
 
 **Understanding the idea:**
 - Check out the current project state first (files, docs, recent commits)
 - Ask questions one at a time to refine the idea
-- Prefer multiple choice questions when possible, but open-ended is fine too
+- **Use multiple choice questions** - easier to answer, keeps momentum
 - Only one question per message - if a topic needs more exploration, break it into multiple questions
 - Focus on understanding: purpose, constraints, success criteria
 
@@ -34,36 +34,56 @@ Start by understanding the current project context, then ask questions one at a 
 
 ## After the Design
 
-**Documentation:**
-- Write the validated design to `docs/plans/YYYY-MM-DD-<topic>-design.md`
-- Use elements-of-style:writing-clearly-and-concisely skill if available
-- Do not commit unless the user explicitly requests it
+When the design is validated, ask: **"Ready to plan the implementation?"**
 
-**Implementation (if continuing):**
-- Ask: "Ready to set up for implementation?"
-- Use superpowers:using-git-worktrees to create isolated workspace
-- Use superpowers:writing-plans to create detailed implementation plan
+If yes, transition to planning:
 
-## PR Documentation
+1. **Create an epic bead** with the design decisions:
+   ```bash
+   bd create --title="[Feature name]" --type=epic --priority=2 \
+     --design="[Summarize key design decisions from brainstorm]"
+   ```
 
-When the implementation is complete and the PR is ready to merge, add a comprehensive GitHub comment documenting:
+2. **Create child beads** for meaningful chunks (3-7 per feature):
+   ```bash
+   bd create --title="[Chunk description]" --type=task --priority=2
+   bd dep add <child-id> <epic-id>  # Child depends on epic
+   ```
 
-1. **The Problem** - What issue triggered this work
-2. **Root Cause** - Technical explanation of why it happened
-3. **Options Considered** - Table of alternatives with pros/cons
-4. **Decision** - Which option was chosen and why
-5. **What This Solution Does** - Before/after diagrams or explanation
-6. **Files Changed** - Summary of modifications
+   Each chunk should be:
+   - A logical commit point
+   - Something an agent could pick up and make progress on independently
+   - Not too granular (not "add semicolon") or too broad (not "implement everything")
 
-Use `gh pr comment <number> --body "..."` to add the comment.
+3. **Determine execution strategy** and explain it:
+   - **Parallel subagents** - If beads are independent, spin up subagents
+   - **Sequential** - If beads have dependencies, work through them in order
+   - **Fresh orchestrator** - If context is limited, provide handoff prompt
 
-This creates a permanent record of the investigation and decision-making process for future reference.
+   Say what you're doing and why. Offer ripcord: "Say 'stop' if you want to change approach."
+
+4. **Start implementation** or **provide handoff prompt**:
+
+   If continuing in this session:
+   - Mark the first ready bead as in_progress
+   - Begin implementation
+
+   If handing off (context low, user preference, or parallel orchestration needed):
+   ```
+   Continue implementing beads under epic beads-xxx.
+   Enter [orchestrator/implementor] mode.
+
+   Key decisions from brainstorm:
+   - [Decision 1]
+   - [Decision 2]
+   ```
 
 ## Key Principles
 
 - **One question at a time** - Don't overwhelm with multiple questions
-- **Multiple choice preferred** - Easier to answer than open-ended when possible
+- **Multiple choice preferred** - Easier to answer than open-ended
 - **YAGNI ruthlessly** - Remove unnecessary features from all designs
 - **Explore alternatives** - Always propose 2-3 approaches before settling
 - **Incremental validation** - Present design in sections, validate each
-- **Be flexible** - Go back and clarify when something doesn't make sense
+- **Beads, not markdown** - Track work in beads, not committed plan files
+- **Smooth handoffs** - Auto-continue or provide ready-to-use prompt
