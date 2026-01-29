@@ -1,7 +1,8 @@
 {
   "includeCoAuthoredBy": false,
   "enabledPlugins": {
-    "greptile@claude-plugins-official": true
+    "greptile@claude-plugins-official": true,
+    "beads@beads-marketplace": true
   },
   "alwaysThinkingEnabled": true
 }
