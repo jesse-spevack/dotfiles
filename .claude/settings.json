@@ -1,4 +1,17 @@
 {
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/deny-rm-rf.py"
+          }
+        ]
+      }
+    ]
+  },
   "includeCoAuthoredBy": false,
   "enabledPlugins": {
     "greptile@claude-plugins-official": true,
