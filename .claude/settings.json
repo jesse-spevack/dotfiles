@@ -1,4 +1,7 @@
 {
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
   "includeCoAuthoredBy": false,
   "hooks": {
     "PreToolUse": [
@@ -8,6 +11,15 @@
           {
             "type": "command",
             "command": "$HOME/.claude/hooks/deny-rm-rf.py"
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit|MultiEdit|NotebookEdit|Bash|mcp__.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "turbocommit hook pre-tool-use"
           }
         ]
       }
@@ -21,15 +33,54 @@
           }
         ]
       }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "turbocommit hook session-start"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "turbocommit hook session-end"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "turbocommit hook stop"
+          }
+        ]
+      }
     ]
   },
   "enabledPlugins": {
-    "greptile@claude-plugins-official": true,
-    "beads@beads-marketplace": true
+    "beads@beads-marketplace": true,
+    "ruby-lsp@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true,
+    "playground@claude-plugins-official": true,
+    "fizzy@37signals": true
+  },
+  "extraKnownMarketplaces": {
+    "37signals": {
+      "source": {
+        "source": "github",
+        "repo": "basecamp/claude-plugins"
+      }
+    }
   },
   "alwaysThinkingEnabled": true,
-  "skipDangerousModePermissionPrompt": true,
-  "env": {
-    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
-  }
+  "effortLevel": "high",
+  "skipDangerousModePermissionPrompt": true
 }

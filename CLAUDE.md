@@ -16,9 +16,18 @@ These preferences apply globally to all projects.
 
 ## Git Workflow
 
-- **Always work on branches, not main** - Create a feature branch before making changes
+- **Always use worktrees, never commit to main** - Assume multiple independent workstreams at all times. Create a worktree (`git worktree add -b feat/name ~/code/repo-name path`) before making any changes. Even one-line fixes.
+- **Branch → PR → squash merge** - Push the branch, create a PR, review, then squash-merge with a clear semantic commit message. Never merge locally.
 - **Create PRs at reviewable milestones** - Not one mega-PR at the end
 - **Use semantic commits** - `feat:`, `fix:`, `refactor:`, etc.
+- **Clean up worktrees after merge** - `git worktree remove` once the PR is merged
+
+## Tools
+
+- **Fizzy** (`fizzy`) — CLI for managing Jesse's kanban board. Use it to list boards, create/close cards, manage columns, tags, comments, etc.
+- **1Password CLI** (`op`) — Available for retrieving secrets, credentials, and secure notes. Use it instead of asking Jesse for passwords or API keys.
+- **Podread CLI** (`podread`) — Converts text to speech and publishes to Jesse's personal podcast feed.
+- **Ghost CLI** (`ghst`) — Available for managing Ghost blog platform content and configuration.
 
 ## Tracking Work
 
