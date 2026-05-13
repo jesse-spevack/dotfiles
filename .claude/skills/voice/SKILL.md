@@ -142,7 +142,38 @@ This is the most important section. The gap between draft and sent is where the 
 - Kept "No surprises." Process language is not filler.
 - Added "Thanks for being generous with your time." Genuine, specific, warmer than the AI's closer.
 
-### Example 2 — From "Little Man Big Risks" (narrative essay template)
+### Example 2 — David Gross thank-you email (2026-04-16)
+
+**Drafted (Claude):**
+> Hi David,
+>
+> Thanks for the time yesterday. It was very cool to hear your take on the AI adoption and incentive story, the retreat system, FPGAs, and what new grads get wrong about technical skills.
+>
+> We'll pull this into a research report and eventually the deep dive piece, and you'll get the draft for review + final sign-off before anything goes out. No surprises.
+>
+> If there's anything you'd like to caveat in retrospect just flag it. Thanks for being generous with your time.
+>
+> Cheers,
+> Jesse
+
+**Sent (Jesse):**
+> Hi David,
+>
+> Thanks for the time yesterday. It was very cool to hear your take on the AI adoption and incentive story.
+>
+> We'll pull this into a research report and eventually the deep dive piece, and you'll get the draft for review + final sign-off before anything goes out. No surprises.
+>
+> If there's anything you'd like to caveat in retrospect just flag it. Thanks for being generous with your time.
+>
+> Cheers,
+> Jesse
+
+**Lessons:**
+- Cut the full flat list ("the retreat system, FPGAs, and what new grads get wrong about technical skills") down to the single most important thread ("the AI adoption and incentive story"). Jesse's instinct on a short email is to name one thing, not four. The four-item list is safer for the AI but reads like a recap of the interview agenda.
+- The flat-list pattern from the Pat email works, but it's not a formula. When one topic is clearly the standout of the conversation, name just that one. The flat list is for when several topics are co-equal.
+- Kept everything else identical. The rest of the Pat email scaffolding (review + sign-off, "No surprises," "Thanks for being generous with your time") held up as a reusable short-email template.
+
+### Example 3 — From "Little Man Big Risks" (narrative essay template)
 
 **Pattern:** Concrete opening sentence → escalating specifics → the hard moment in dialogue → emotional beat stated flatly → flat landing with small detail.
 
@@ -156,7 +187,7 @@ Then later:
 
 **Lesson:** The closer is not "I learned that parenting is about showing up." It's *french fries*. The small specific detail carries the whole emotional weight. Never write the explicit moral.
 
-### Example 3 — From "CIM 2024 Post Mortem" (analytical template)
+### Example 4 — From "CIM 2024 Post Mortem" (analytical template)
 
 > I am not better than anyone.
 
@@ -168,7 +199,7 @@ That's the closing line.
 
 **Lesson:** Bookend a long analytical piece with flat, plain admissions. Not a thesis statement and not a summary. A stance and a caveat. The analysis in between earns its keep by being specific (mileage numbers, heart rate, pace targets, race splits).
 
-### Example 4 — From "The Temuification of the American School System" (take/opinion template)
+### Example 5 — From "The Temuification of the American School System" (take/opinion template)
 
 > Ed Reform is trying to fix our education system by shopping at Temu. You get what you pay for and oftentimes getting it for cheap is worse than not getting it at all. Now you have a misfitting pair of paper-thin jeans. Sure, it costs $3, but you have to throw them out.
 
@@ -178,13 +209,89 @@ That's the closing line.
 
 **Lesson:** When stating policy opinions, state them plainly without hedging. "The money exists; it is a matter of prioritization." is six words of policy argument and they land harder than a paragraph would.
 
-### Example 5 — From "I Enjoyed Passing Him Most" (race recap template)
+### Example 6 — From "I Enjoyed Passing Him Most" (race recap template)
 
 > One runner was boorishly listening to music on his cell phone in his pocket. I enjoyed passing him most.
 >
 > An aside, I have no problem with people who want to wear headphones when they race as long as it doesn't impact their situational awareness. But, playing music out loud while racing is completely feral behavior.
 
 **Lesson:** State the opinion ("I enjoyed passing him most"), then handle the nuance in a follow-up aside that concedes the reasonable case and then escalates the judgment ("completely feral behavior"). Opinion → nuance → sharper opinion. Don't hedge the original.
+
+### Example 7 — "Pay per narration" announcement post, verynormal.info (2026-04-19)
+
+Context: product-launch announcement post for PodRead's public API and the Machine Payments Protocol. Claude produced a first draft using the voice skill; Jesse then revised and published. The full draft→sent delta shows which voice-skill rules are absolute and which have useful exceptions.
+
+**Drafted (Claude):**
+
+> # Pay per narration
+>
+> I shipped a public API for [PodRead](https://podread.app) this week. That part is normal.
+>
+> The other thing I shipped is a way to pay for a narration without making an account. You POST to an endpoint with no auth. You get a 402 back with a challenge. Your client signs an on-chain stablecoin transfer on the Tempo network for 75 cents. You retry with the signed credential. You get a podcast episode.
+>
+> This is the Machine Payments Protocol. The name is boring. The bet isn't.
+>
+> Agents are going to have wallets. More commerce is going to happen on our behalf, not by us. If that's the direction, the credit card form is the wrong shape. A 402 with a signed payment credential is the right shape. I don't know when it takes off. I know I'd rather have the doorway open.
+>
+> Here's the whole flow. It works today:
+>
+> ```
+> npx mppx -X POST \
+>   -J '{"text":"hello world","source_type":"text","title":"t","author":"me"}' \
+>   https://podread.app/api/v1/mpp/narrations
+> ```
+>
+> `mppx` is the reference client. It handles the 402 → sign → retry for you. You need some pathUSD on Tempo mainnet. 75 cents gets you a Standard voice. A dollar gets you Premium. The default is `felix`, a Standard voice, because spending a dollar by accident on a voice the caller didn't ask for felt rude.
+>
+> If you'd rather act like a human, there's a second door. Sign up, mint a token at /settings/api_tokens, POST to /api/v1/episodes with a Bearer header. Same text, same voices, attached to your podcast feed. No chain, no challenge. For most humans this is the path.
+>
+> I don't know if MPP gets used. I don't know if agents will buy narrations. But the doorway is open.
+>
+> Docs at /docs/mpp.
+
+**Sent (Jesse):**
+
+> # Pay per narration
+> #### PodRead is the first text to speech api that supports the Machine Payments Protocol
+>
+> We shipped a public API for PodRead, the app that takes text, converts it to audio, and places it in your personal podcast feed so you can listen along with everything else.
+>
+> AI agents are starting to have wallets. More and more commerce is going to happen on our behalf. I don't know when agentic commerce takes off, but I'd like to have the doorway open for when it does.
+>
+> PodRead is the first text-to-speech tool on the Machine Payments Protocol (MPP). You POST to an endpoint with no auth. You get a 402 back with a challenge that says here's the price and here's how we accept payment, in machine-friendly terms. Your client signs an on-chain stablecoin transfer on the Tempo network. You retry with the signed credential. You get an audio file.
+>
+> This is the equivalent of reaching for an item on display, then having the storekeeper share the price with you, then you handing over a sufficient amount of cash, and then receiving the item. It's just on the internet, between servers.
+>
+> Tempo and stablecoin keep this in the decidedly unsketchy region of the crypto landscape. MPP is backed by industry leaders like my employer, Stripe.
+>
+> Here's the whole flow, which I invite you to try out for yourself today.
+>
+> ```
+> npx mppx -X POST \
+>   -J '{"text":"hello world","source_type":"text","title":"Baby's first machine to machine payment","author":"me"}' \
+>   https://podread.app/api/v1/mpp/narrations
+> ```
+>
+> mppx is the reference client. It handles the 402 → sign → retry for you. You need some pathUSD on Tempo mainnet. 75 cents gets you a Standard voice. A dollar gets you Premium.
+>
+> For my developer friends and users who haven't yet handed their wallets to Claude Code, there's a second door. Sign up, mint a token at /settings/api_tokens, POST to /api/v1/episodes with a Bearer header. Same text, same voices, attached to your personal podcast feed. No blockchain or challenge. For most humans this is the path.
+>
+> API access has been on the roadmap for a while. It's live now, for humans and agents alike.
+>
+> Read the full specification in our documentation, or just share them with your agent.
+
+**Lessons:**
+
+- **Concrete physical analogies are welcome, not redundant.** The Claude draft explained MPP mechanically (402 → sign → retry) and assumed the reader would parse it. Jesse added a full paragraph analogizing the protocol to a physical transaction: "reaching for an item on display, then having the storekeeper share the price with you, then you handing over a sufficient amount of cash, and then receiving the item." When explaining an abstract protocol or unfamiliar mechanic, reach for a physical analogy before moving on. Don't assume engineer-reader-only.
+- **Specificity over pronouns.** Claude: "I don't know when it takes off." Jesse: "I don't know when agentic commerce takes off." Name the thing being predicted. Pronouns lose specificity.
+- **"The name is boring. The bet isn't." is a Claude tic.** Claude wrote this as a punchy two-beat. Jesse cut it. The "X isn't Y" call-and-response sounds crisp but is structurally performative. Skip it.
+- **"The credit card form is the wrong shape. A 402 with a signed payment credential is the right shape." is also a Claude tic.** Parallel wrong-shape/right-shape construction is a rhetorical tell. Jesse cut the whole paragraph; the "agents will have wallets" prediction stood without it. When reaching for parallelism to make a point feel clean, that's the tell.
+- **"Industry leaders like my employer, Stripe" stayed — the rule isn't absolute.** The draft used "industry leaders" only to be flagged as a LinkedIn tell; Claude proposed "Stripe is behind MPP. They also pay me." Jesse kept his original. "Industry leaders" becomes voice-consistent when paired with an honest self-disclosure ("like my employer, Stripe") — the puffery word is neutralized by the ownership. The rule: don't say "industry leaders" unhooked from a grounded disclosure, but in a disclosure line, it can stay.
+- **"Decidedly" stayed — the adverb-cutting rule isn't absolute either.** "Decidedly unsketchy" has a rhythmic bite that plainer alternatives lose. When an adverb is load-bearing for a joke's cadence, keep it. Cutting every adverb on principle flattens the voice.
+- **Whimsy in examples.** Claude: `"text":"hello world"`. Jesse: `"title":"Baby's first machine to machine payment"`. Technical examples are a free slot for personality without bloating prose. Cute titles in code samples are fair game and signal the author's register.
+- **Closes can tie back to the thesis flatly.** Claude closed with "Docs at /docs/mpp." — safe and flat but thematically inert. Jesse closed with "Read the full specification in our documentation, or just share them with your agent." The second clause callbacks to the entire post's premise (agents conducting commerce on your behalf) without restating it. A close that rhymes with the thesis beats a close that just stops.
+- **Subtitles matter on Ghost posts.** Claude wrote no subtitle. Jesse added "PodRead is the first text to speech api that supports the Machine Payments Protocol" — thesis + SEO + reader-orientation in one line. For blog announcements on verynormal.info, offer a subtitle draft.
+- **"For most humans this is the path" survived unchanged.** When Claude gets a sentence right, notice what pattern made it land: flat declarative, concrete noun ("humans"), no hype. That's the reusable shape.
 
 ## Company / Product Context
 

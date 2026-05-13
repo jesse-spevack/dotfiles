@@ -24,16 +24,6 @@
         ]
       }
     ],
-    "UserPromptSubmit": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/hooks/claudeception-activator.sh"
-          }
-        ]
-      }
-    ],
     "SessionStart": [
       {
         "hooks": [
@@ -70,7 +60,8 @@
     "ruby-lsp@claude-plugins-official": true,
     "frontend-design@claude-plugins-official": true,
     "playground@claude-plugins-official": true,
-    "fizzy@37signals": true
+    "fizzy@37signals": true,
+    "planbridge@contextbridge": true
   },
   "extraKnownMarketplaces": {
     "37signals": {
@@ -78,9 +69,17 @@
         "source": "github",
         "repo": "basecamp/claude-plugins"
       }
+    },
+    "contextbridge": {
+      "source": {
+        "source": "github",
+        "repo": "contextbridge/claude-plugin"
+      }
     }
   },
   "alwaysThinkingEnabled": true,
   "effortLevel": "high",
-  "skipDangerousModePermissionPrompt": true
+  "skipDangerousModePermissionPrompt": true,
+  "autoCompactEnabled": false,
+  "agentPushNotifEnabled": true
 }
