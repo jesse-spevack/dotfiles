@@ -29,7 +29,7 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 # Source zsh syntax highlighting
-source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 # If you're not using ZSH from Homebrew (brew install zsh and $(brew --prefix)/bin/zsh), you must also add the site-functions to your fpath in $HOME/.zshrc:
 fpath+=("$(brew --prefix)/share/zsh/site-functions")
@@ -77,6 +77,7 @@ esac
 # Ensure Node.js binaries are in PATH
 export PATH="$HOME/.npm-global/bin:$PATH"
 
-. "$HOME/.local/bin/env"
+export PATH="$HOME/.local/bin:$PATH"
+[ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"
 
 alias lfg="claude --dangerously-skip-permissions"
