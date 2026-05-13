@@ -44,6 +44,12 @@ if command -v asdf >/dev/null 2>&1; then
   asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git || true
 fi
 
+# 5b. fizzy CLI (not actually on Homebrew despite README claims)
+if [[ ! -x "$HOME/.local/bin/fizzy" ]]; then
+  log "Installing fizzy CLI"
+  curl -fsSL https://raw.githubusercontent.com/basecamp/fizzy-cli/master/scripts/install.sh | bash || true
+fi
+
 # 6. Back up any pre-existing dotfiles that would conflict with stow
 log "Backing up existing dotfiles that would block stow"
 TS="$(date +%Y%m%d-%H%M%S)"

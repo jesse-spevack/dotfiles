@@ -2,7 +2,6 @@
 # Run via: brew bundle (or use ./bootstrap.sh which does this and more)
 
 tap "jesse-spevack/tap"
-tap "basecamp/tap"
 
 # ---- Repo / shell plumbing ----
 brew "git"
@@ -45,7 +44,10 @@ cask "font-jetbrains-mono-nerd-font"
 
 # ---- Custom CLIs ----
 brew "jesse-spevack/tap/podread"
-brew "basecamp/tap/fizzy"
 
+# fizzy: README claims `brew install basecamp/tap/fizzy`, but the tap does
+# not actually publish that formula. bootstrap.sh installs it via the
+# upstream curl|bash installer (lands at ~/.local/bin/fizzy) instead.
+#
 # Ghost-CLI is installed via npm post-bootstrap (binary: `ghost`):
 #   sudo npm install -g ghost-cli@latest
