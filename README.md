@@ -122,8 +122,10 @@ After bootstrap completes, finish these manual steps:
 3. In tmux, press `<prefix> + I` to install tpm plugins.
 4. `gh auth login` (if not done).
 5. `ssh-keygen -t ed25519 -C "<email>"` and add to GitHub.
-6. Install custom CLIs separately: `fizzy`, `podread`, `ghst`.
-7. `asdf install ruby <version>` / `asdf install nodejs <version>` as needed.
+6. `asdf install ruby <version>` / `asdf install nodejs <version>` as needed.
+7. Install Ghost-CLI (requires Node.js from step 6): `sudo npm install -g ghost-cli@latest` (binary is `ghost`).
+8. `podread auth login` to authenticate the podread CLI (installed via Brewfile).
+9. Install remaining custom CLIs separately: `fizzy`.
 
 ## Package Structure
 
