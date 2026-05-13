@@ -31,7 +31,18 @@ sudo apt install stow
 
 ## Installation
 
-### Fresh Install
+### Quick Start (fresh machine)
+
+One command installs Homebrew (if missing), runs `brew bundle`, installs Oh My Zsh + tpm, adds asdf plugins, and stows everything:
+
+```bash
+git clone https://github.com/jesse-spevack/dotfiles.git ~/dotfiles
+cd ~/dotfiles && ./bootstrap.sh
+```
+
+`bootstrap.sh` is idempotent — safe to re-run after pulling updates.
+
+### Manual install (existing tooling)
 
 1. Clone this repository:
 ```bash
@@ -39,12 +50,17 @@ git clone https://github.com/jesse-spevack/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 ```
 
-2. Install all packages:
+2. Install dependencies:
+```bash
+brew bundle
+```
+
+3. Stow all packages:
 ```bash
 stow zsh git tmux nvim ghostty starship ssh
 ```
 
-Or install packages selectively:
+Or stow packages selectively:
 ```bash
 stow zsh git nvim
 ```
@@ -97,10 +113,20 @@ stow -D zsh  # Removes zsh symlinks
 
 ## Setting Up a New Machine
 
-1. Clone the repo
-2. Install GNU Stow
-3. Run `stow` for the packages you want
-4. Done!
+See [Quick Start](#quick-start-fresh-machine) above — `./bootstrap.sh` handles it.
+
+After bootstrap completes, finish these manual steps:
+
+1. Open a new shell so `~/.zshrc` loads.
+2. Run `nvim` once — LazyVim auto-installs plugins.
+3. In tmux, press `<prefix> + I` to install tpm plugins.
+4. `gh auth login` (if not done).
+5. `ssh-keygen -t ed25519 -C "<email>"` and add to GitHub.
+6. `asdf install ruby <version>` / `asdf install nodejs <version>` as needed.
+7. Install Ghost-CLI (requires Node.js from step 6): `sudo npm install -g ghost-cli@latest` (binary is `ghost`).
+8. Authenticate CLIs installed via Brewfile:
+   - `podread auth login` (browser device-code flow)
+   - `fizzy setup` (token + default board)
 
 ## Package Structure
 
