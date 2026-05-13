@@ -2,6 +2,7 @@
 # Run via: brew bundle (or use ./bootstrap.sh which does this and more)
 
 tap "jesse-spevack/tap"
+tap "basecamp/tap"
 
 # ---- Repo / shell plumbing ----
 brew "git"
@@ -42,9 +43,9 @@ cask "1password-cli"
 cask "ghostty"
 cask "font-jetbrains-mono-nerd-font"
 
-# ---- Custom CLIs (from jesse-spevack/tap) ----
+# ---- Custom CLIs ----
 brew "jesse-spevack/tap/podread"
+brew "basecamp/tap/fizzy"
 
-# Not yet on Homebrew — install separately:
-#   - fizzy (kanban board CLI)
-#   - ghst  (Ghost blog CLI)
+# Ghost-CLI is installed via npm post-bootstrap (binary: `ghost`):
+#   sudo npm install -g ghost-cli@latest
