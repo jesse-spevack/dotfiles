@@ -27,7 +27,7 @@ These preferences apply globally to all projects.
 - **Fizzy** (`fizzy`) — CLI for managing Jesse's kanban board. Use it to list boards, create/close cards, manage columns, tags, comments, etc.
 - **1Password CLI** (`op`) — Available for retrieving secrets, credentials, and secure notes. Use it instead of asking Jesse for passwords or API keys.
 - **Podread CLI** (`podread`) — Converts text to speech and publishes to Jesse's personal podcast feed.
-- **Ghost CLI** (`ghst`) — Available for managing Ghost blog platform content and configuration.
+- **Ghost CLI** (`ghost`) — Available for managing Ghost blog platform content and configuration.
 
 ## Tracking Work
 
