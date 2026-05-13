@@ -124,9 +124,9 @@ After bootstrap completes, finish these manual steps:
 5. `ssh-keygen -t ed25519 -C "<email>"` and add to GitHub.
 6. `asdf install ruby <version>` / `asdf install nodejs <version>` as needed.
 7. Install Ghost-CLI (requires Node.js from step 6): `sudo npm install -g ghost-cli@latest` (binary is `ghost`).
-8. Authenticate CLIs installed via Brewfile:
+8. Authenticate the CLIs:
    - `podread auth login` (browser device-code flow)
-   - `fizzy setup` (token + default board)
+   - `fizzy setup` (token + default board) — `fizzy` is installed to `~/.local/bin/fizzy`; make sure that's on `$PATH`.
 
 ## Package Structure
 
