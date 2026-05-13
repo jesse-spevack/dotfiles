@@ -32,9 +32,10 @@ if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
 fi
 
 # 4. Tmux Plugin Manager (tpm)
-if [[ ! -d "$HOME/.tmux/plugins/tpm" ]]; then
+if [[ ! -d "$HOME/.config/tmux/plugins/tpm" ]]; then
   log "Cloning tpm"
-  git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
+  mkdir -p "$HOME/.config/tmux/plugins"
+  git clone https://github.com/tmux-plugins/tpm "$HOME/.config/tmux/plugins/tpm"
 fi
 
 # 5. asdf plugins (ruby + nodejs)
