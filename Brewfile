@@ -1,6 +1,8 @@
 # Homebrew Bundle for Jesse's dotfiles
 # Run via: brew bundle (or use ./bootstrap.sh which does this and more)
 
+tap "jesse-spevack/tap"
+
 # ---- Repo / shell plumbing ----
 brew "git"
 brew "gh"
@@ -40,8 +42,9 @@ cask "1password-cli"
 cask "ghostty"
 cask "font-jetbrains-mono-nerd-font"
 
-# ---- Custom CLIs (not on Homebrew) ----
-# These are installed separately — see bootstrap.sh comments:
-#   - fizzy   (kanban board CLI)
-#   - podread (text-to-podcast CLI)
-#   - ghst    (Ghost blog CLI)
+# ---- Custom CLIs (from jesse-spevack/tap) ----
+brew "jesse-spevack/tap/podread"
+
+# Not yet on Homebrew — install separately:
+#   - fizzy (kanban board CLI)
+#   - ghst  (Ghost blog CLI)
