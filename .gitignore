@@ -8,11 +8,9 @@ nvim/.config/nvim/lazyvim.json
 # Tmux plugin manager plugins (managed by tpm)
 tmux/.config/tmux/plugins/
 
-# SSH keys and sensitive files
-ssh/.ssh/id_*
-ssh/.ssh/*.pem
-ssh/.ssh/*.key
-ssh/.ssh/known_hosts
+# SSH keys and sensitive files — deny everything in ssh/.ssh, only `config` is shareable
+ssh/.ssh/*
+!ssh/.ssh/config
 
 # macOS
 .DS_Store
