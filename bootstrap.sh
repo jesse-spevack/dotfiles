@@ -62,6 +62,48 @@ for f in .zshrc .gitconfig; do
   fi
 done
 
+# 6b. Ensure ~/.ssh is a real directory (not a wholesale symlink into dotfiles).
+# Historically `stow ssh` created ~/.ssh as a directory symlink into
+# ~/dotfiles/ssh/.ssh/, which meant any private key written to ~/.ssh/
+# physically landed inside a public git repo. Now only `config` is stowed;
+# keys must live in a real ~/.ssh/ directory. Idempotent.
+if [[ -L "$HOME/.ssh" ]]; then
+  log "Migrating ~/.ssh from directory symlink to real directory"
+  ssh_target="$(readlink -f "$HOME/.ssh")"
+  backup="/tmp/ssh-backup-$TS"
+  cp -RL "$HOME/.ssh/" "$backup/"
+  chmod -R go-rwx "$backup"
+  log "Backup at $backup"
+
+  park="$HOME/.ssh-migration-temp-$TS"
+  mkdir -p "$park"
+  chmod 700 "$park"
+  (
+    shopt -s dotglob nullglob
+    for entry in "$ssh_target"/*; do
+      [[ "$(basename "$entry")" == "config" ]] && continue
+      mv "$entry" "$park/"
+    done
+  )
+
+  rm "$HOME/.ssh"
+  mkdir -p "$HOME/.ssh"
+  chmod 700 "$HOME/.ssh"
+
+  (
+    shopt -s dotglob nullglob
+    for entry in "$park"/*; do
+      mv "$entry" "$HOME/.ssh/"
+    done
+  )
+  rmdir "$park"
+fi
+
+if [[ ! -d "$HOME/.ssh" ]]; then
+  mkdir -p "$HOME/.ssh"
+  chmod 700 "$HOME/.ssh"
+fi
+
 # 7. Stow
 log "Stowing dotfiles"
 cd "$DOTFILES_DIR"
