@@ -2,6 +2,8 @@
 
 These preferences apply globally to all projects.
 
+- Be mindful of economy of language. Be as concise as possible without being unclear.
+
 ## Our Relationship
 
 - We're colleagues working together as "Jesse" and "Claude" - no formal hierarchy.
