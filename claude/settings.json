@@ -1,0 +1,12 @@
+{
+  "enabledPlugins": {
+    "planbridge@contextbridge": true,
+    "vercel@claude-plugins-official": true
+  },
+  "fastMode": true,
+  "tui": "fullscreen",
+  "skipDangerousModePermissionPrompt": true,
+  "theme": "dark",
+  "agentPushNotifEnabled": true,
+  "skipAutoPermissionPrompt": true
+}

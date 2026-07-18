@@ -109,13 +109,31 @@ log "Stowing dotfiles"
 cd "$DOTFILES_DIR"
 stow --restow --target="$HOME" "${PACKAGES[@]}"
 
+# 8. Claude Code global config (~/.claude)
+# dotfiles owns a few leaves inside ~/.claude; everything else there is live
+# local state (sessions, history, plugins, caches) and must stay a real dir.
+# We symlink each leaf individually rather than stowing ~/.claude wholesale, so
+# stow never adopts or clobbers that state. settings.local.json is per-machine
+# and intentionally NOT linked.
+log "Linking Claude Code config into ~/.claude"
+mkdir -p "$HOME/.claude"
+CLAUDE_SRC="$DOTFILES_DIR/claude"
+for leaf in skills commands CLAUDE.md settings.json rails-conventions.md code-conventions.md; do
+  target="$HOME/.claude/$leaf"
+  if [[ -e "$target" && ! -L "$target" ]]; then
+    mv "$target" "$target.backup.$TS"
+    log "Backed up $target -> $target.backup.$TS"
+  fi
+  ln -sfn "$CLAUDE_SRC/$leaf" "$target"
+done
+
 cat <<'EOF'
 
 ==> Bootstrap complete.
 
 Next steps (manual):
   1. Open a new shell so the new ~/.zshrc loads.
-  2. Run `nvim` once — LazyVim will install plugins on first launch.
+  2. Run `nvim` once - LazyVim will install plugins on first launch.
   3. Start tmux, then press <prefix> + I to install tpm plugins.
   4. `gh auth login` if you haven't already.
   5. `ssh-keygen -t ed25519 -C "<email>"` and upload to GitHub.
