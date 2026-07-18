@@ -48,21 +48,9 @@ For any feature request or bug, drive the work end-to-end: research → plan →
 
 Tactical choices (which file, which helper, which convention to match) are yours. "I'm not sure" is a signal to do more work, not to ask a question.
 
-## Code Standards
+## Code
 
-- Match the style of surrounding code.
-- Simple > clever. Readable > concise.
-- YAGNI - don't add features we don't need now.
-- Fix broken things immediately.
-- Never delete tests because they're failing.
-- Follow the comment conventions in `~/.claude/code-conventions.md` when writing code.
-
-## Naming Conventions
-
-- Names describe WHAT, not HOW or HISTORY.
-- Never use: "New", "Legacy", "Improved", "Enhanced", "Wrapper".
-- Never use implementation details: "ZodValidator", "JSONParser".
-- Good: `Tool`, `Registry`, `execute()`. Bad: `NewToolFactory`, `ImprovedExecutor`.
+- When writing code, follow the conventions in `~/.claude/code-conventions.md` (code standards, naming, comments).
 
 ## Rails Projects
 

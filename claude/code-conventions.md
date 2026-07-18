@@ -1,6 +1,21 @@
 # Code Conventions
 
-General code-writing conventions that apply across projects.
+General code-writing conventions that apply across projects. Follow these when writing code.
+
+## Code Standards
+
+- Match the style of surrounding code.
+- Simple > clever. Readable > concise.
+- YAGNI - don't add features we don't need now.
+- Fix broken things immediately.
+- Never delete tests because they're failing.
+
+## Naming Conventions
+
+- Names describe WHAT, not HOW or HISTORY.
+- Never use: "New", "Legacy", "Improved", "Enhanced", "Wrapper".
+- Never use implementation details: "ZodValidator", "JSONParser".
+- Good: `Tool`, `Registry`, `execute()`. Bad: `NewToolFactory`, `ImprovedExecutor`.
 
 ## Comments
 
