@@ -155,6 +155,11 @@ ln -sfn "$DOTFILES_DIR/herdr/.config/herdr/config.toml" "$herdr_target"
 # "fastMode" when first run. The hooks block is already tracked in
 # claude/settings.json, so snapshot that file, let the installer lay down the
 # script, then put the tracked version back.
+#
+# Restoring also keeps the hook command portable. The installer hardcodes an
+# absolute /Users/<name>/ path; the tracked version uses "$HOME" so the same
+# settings.json works on any machine. Hook commands with no "args" key run
+# through `sh -c`, so $HOME expands at run time.
 if command -v herdr >/dev/null 2>&1; then
   if ! herdr integration status 2>/dev/null | grep -q '^claude: current'; then
     log "Installing herdr agent-state hook for Claude Code"
