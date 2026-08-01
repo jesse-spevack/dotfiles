@@ -10,6 +10,7 @@ brew "stow"
 
 # ---- Core dotfiles dependencies ----
 brew "tmux"
+brew "herdr"
 brew "neovim"
 brew "starship"
 brew "zsh-syntax-highlighting"

@@ -5,7 +5,7 @@
 set -euo pipefail
 
 DOTFILES_DIR="${DOTFILES_DIR:-$HOME/dotfiles}"
-PACKAGES=(zsh git tmux nvim ghostty starship ssh)
+PACKAGES=(zsh git tmux herdr nvim ghostty starship ssh)
 
 log() { printf "\n\033[1;34m==>\033[0m %s\n" "$*"; }
 
@@ -126,6 +126,25 @@ for leaf in skills commands CLAUDE.md settings.json rails-conventions.md code-co
   fi
   ln -sfn "$CLAUDE_SRC/$leaf" "$target"
 done
+
+# 9. Herdr agent-state hook for Claude Code
+# The hook script is generated per-machine and is not tracked here, so it has
+# to come from `herdr integration install claude`. That installer also writes
+# the SessionStart block into settings.json, but it round-trips the whole file
+# through its own JSON model and drops keys it does not recognise - it deleted
+# "fastMode" when first run. The hooks block is already tracked in
+# claude/settings.json, so snapshot that file, let the installer lay down the
+# script, then put the tracked version back.
+if command -v herdr >/dev/null 2>&1; then
+  if ! herdr integration status 2>/dev/null | grep -q '^claude: current'; then
+    log "Installing herdr agent-state hook for Claude Code"
+    settings_snapshot="$(mktemp)"
+    cp "$CLAUDE_SRC/settings.json" "$settings_snapshot"
+    herdr integration install claude
+    cp "$settings_snapshot" "$CLAUDE_SRC/settings.json"
+    rm -f "$settings_snapshot"
+  fi
+fi
 
 cat <<'EOF'
 
