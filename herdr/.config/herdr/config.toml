@@ -1,0 +1,108 @@
+# herdr configuration
+# Migrated from ~/.config/tmux/tmux.conf + tmux.reset.conf
+# Run `herdr --default-config` to see every available setting.
+# Reload after editing: `herdr server reload-config`
+
+onboarding = false
+
+[theme]
+# Matches Ghostty (theme = Catppuccin Mocha) and the tmux catppuccin plugin.
+name = "catppuccin"
+auto_switch = false
+
+[terminal]
+# Empty = $SHELL (zsh). "auto" gives login shells on macOS.
+default_shell = ""
+shell_mode = "auto"
+# tmux equivalent: -c "#{pane_current_path}" on every split.
+new_cwd = "follow"
+
+[keys]
+# tmux prefix was ctrl+a, not the default ctrl+b.
+prefix = "ctrl+a"
+
+# --- Ergodox F-key layer (no prefix), carried over from tmux ---
+# F1 has no herdr equivalent: herdr is mouse-native, drag-select copies
+# directly, so there is no copy-mode to enter. F1 opens the scrollback in
+# $EDITOR instead, which is the closest analog.
+edit_scrollback = ["prefix+e", "f1"]
+
+# F2 = split right (tmux split-window -h), F3 = split down (tmux -v)
+split_vertical = ["prefix+v", "f2"]
+split_horizontal = ["prefix+minus", "f3"]
+
+# F4 = new tab (tmux new-window). tmux "window" == herdr "tab".
+new_tab = ["prefix+c", "f4"]
+
+# F5-F8 = pane left/down/up/right, plus the alt+hjkl layer from tmux.reset.conf
+focus_pane_left = ["prefix+h", "f5", "alt+h"]
+focus_pane_down = ["prefix+j", "f6", "alt+j"]
+focus_pane_up = ["prefix+k", "f7", "alt+k"]
+focus_pane_right = ["prefix+l", "f8", "alt+l"]
+
+# F9/F10 = prev/next tab, plus alt+shift+h/l (tmux M-H / M-L)
+previous_tab = ["prefix+p", "f9", "alt+shift+h"]
+next_tab = ["prefix+n", "f10", "alt+shift+l"]
+
+# F11 was last-window in tmux. herdr has no last-tab action; the goto picker
+# is the closest thing and is faster once you have more than two tabs.
+goto = ["prefix+g", "f11"]
+
+# tmux had prefix+ctrl+d for detach.
+detach = ["prefix+q", "prefix+ctrl+d"]
+
+# tmux workspace/session analogs
+workspace_picker = "prefix+w"
+new_workspace = "prefix+shift+n"
+switch_tab = "prefix+1..9"
+
+# Worktree creation, since every workstream here starts as a worktree.
+new_worktree = "prefix+shift+g"
+
+# prefix+alt+g for lazygit in a popup (tmux had no equivalent; this replaces
+# dropping into a shell pane for git work).
+[[keys.command]]
+key = "prefix+alt+g"
+type = "popup"
+command = "lazygit"
+description = "lazygit"
+width = "90%"
+height = "90%"
+
+[worktrees]
+directory = "~/code/worktrees"
+
+[ui]
+# Catppuccin Mocha mauve.
+accent = "#cba6f7"
+# Surface which agent owns which pane at a glance.
+show_agent_labels_on_pane_borders = true
+# "priority" puts blocked agents at the top of the sidebar instead of grouping
+# strictly by workspace. Better fit for several parallel workstreams.
+agent_panel_sort = "priority"
+# tmux had `set -g set-clipboard on` + vi-mode y; drag-select covers both.
+copy_on_select = true
+mouse_capture = true
+confirm_close = true
+
+[ui.sidebar.agents]
+rows_by_agent.claude = [
+  ["state_icon", "workspace", "tab"],
+  ["terminal_title_stripped"],
+  ["agent"],
+]
+
+[ui.toast]
+# macOS notification when a background agent finishes or gets blocked.
+delivery = "system"
+delay_seconds = 1
+
+[ui.sound]
+enabled = true
+
+[session]
+resume_agents_on_restore = true
+
+[advanced]
+# tmux had history-limit 1000000. ~100MB is the rough byte equivalent.
+scrollback_limit_bytes = 100000000

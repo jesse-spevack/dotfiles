@@ -7,6 +7,7 @@ Modern dotfiles managed with GNU Stow for easy installation and maintenance acro
 - **zsh** - Zsh shell configuration
 - **git** - Git configuration and global ignore file
 - **tmux** - tmux terminal multiplexer with Catppuccin theme
+- **herdr** - Agent multiplexer, keybindings mirrored from the tmux config
 - **nvim** - Neovim with LazyVim setup
 - **ghostty** - Ghostty terminal emulator
 - **starship** - Cross-shell prompt
@@ -57,7 +58,7 @@ brew bundle
 
 3. Stow all packages:
 ```bash
-stow zsh git tmux nvim ghostty starship ssh
+stow zsh git tmux herdr nvim ghostty starship ssh
 ```
 
 Or stow packages selectively:

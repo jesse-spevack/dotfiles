@@ -5,7 +5,7 @@
 set -euo pipefail
 
 DOTFILES_DIR="${DOTFILES_DIR:-$HOME/dotfiles}"
-PACKAGES=(zsh git tmux nvim ghostty starship ssh)
+PACKAGES=(zsh git tmux herdr nvim ghostty starship ssh)
 
 log() { printf "\n\033[1;34m==>\033[0m %s\n" "$*"; }
 
@@ -126,6 +126,21 @@ for leaf in skills commands CLAUDE.md settings.json rails-conventions.md code-co
   fi
   ln -sfn "$CLAUDE_SRC/$leaf" "$target"
 done
+
+# 9. Herdr agent-state integration for Claude Code
+# Installs ~/.claude/hooks/herdr-agent-state.sh and registers a SessionStart
+# hook. The hooks block is already tracked in claude/settings.json, so this
+# only runs when the hook script itself is missing.
+#
+# WARNING: `herdr integration install claude` rewrites settings.json through
+# its own JSON model and drops keys it does not recognise (it silently ate
+# "fastMode" once). If you ever re-run it by hand, check `git diff` afterwards.
+if command -v herdr >/dev/null 2>&1; then
+  if ! herdr integration status 2>/dev/null | grep -q '^claude: current'; then
+    log "Installing herdr agent-state hook for Claude Code"
+    herdr integration install claude
+  fi
+fi
 
 cat <<'EOF'
 
