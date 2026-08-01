@@ -8,6 +8,7 @@ Modern dotfiles managed with GNU Stow for easy installation and maintenance acro
 - **git** - Git configuration and global ignore file
 - **tmux** - tmux terminal multiplexer with Catppuccin theme
 - **herdr** - Agent multiplexer, keybindings mirrored from the tmux config
+  (not stowed - `bootstrap.sh` links `config.toml` on its own, see below)
 - **nvim** - Neovim with LazyVim setup
 - **ghostty** - Ghostty terminal emulator
 - **starship** - Cross-shell prompt
@@ -58,7 +59,7 @@ brew bundle
 
 3. Stow all packages:
 ```bash
-stow zsh git tmux herdr nvim ghostty starship ssh
+stow zsh git tmux nvim ghostty starship ssh
 ```
 
 Or stow packages selectively:
@@ -150,6 +151,12 @@ dotfiles/
 
 ## Notes
 
+- `herdr` is intentionally excluded from `stow`. herdr keeps runtime state
+  (`herdr.sock`, `herdr.log`, `.plugins.lock`) in `~/.config/herdr` alongside
+  its config, and stow folds that whole directory into a symlink when it does
+  not already exist - which puts sockets and logs inside this repo. Same class
+  of problem as the old `stow ssh` behaviour. `bootstrap.sh` links only
+  `config.toml` into a real `~/.config/herdr/` directory.
 - SSH keys are not tracked (see `.gitignore`)
 - Generated files like `lazy-lock.json` are excluded
 - Old dotfiles from previous setup are in `old/` directory
