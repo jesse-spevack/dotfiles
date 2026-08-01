@@ -23,18 +23,30 @@ and updates a Ghost draft post via the ghst CLI.
 
 ### Step 2: Fetch js-notes Items
 
-- Get the API token from 1Password via Kamal:
-  ```
-  kamal secrets fetch --adapter 1password --account VLVMNHTN7NCBZGTYBDOUCQ5EMU --from keys/js-notes API_TOKEN
-  ```
-  Then extract the token value:
-  ```
-  echo '{result}' | python3 -c "import sys,json; print(list(json.load(sys.stdin).values())[0])"
-  ```
-- Call the js-notes MCP endpoint (`POST https://notes.verynormal.dev/mcp`) with `list_recent` (limit 50)
-- Filter to items captured within the target month
-- For each item, call `get_item` in parallel (background curl) to get title, URL, summary, key_points, notes, and tags
+Use the **js-notes MCP connector tools** (`mcp__claude_ai_js-notes__list_recent`, `mcp__claude_ai_js-notes__get_item`).
+Do not hand-roll curl against `/mcp` — see "js-notes API Access" below for why.
+
+- `list_recent` to enumerate items, then filter to the target month
+- **`list_recent` caps at 50 items regardless of the `limit` you pass.** A busy month exceeds that.
+  To reach further back, call it once per `source_type` (`article`, `video`, `podcast`, `social`);
+  each filtered list returns its own 50, which together cover a full month. Cross-check the id
+  sequence for gaps, then confirm any missing id with `get_item` (a "not found" means a deleted
+  capture, not a miss).
+- Check the previous month's published bakery post for its oldest item, so the new post starts
+  where the last one stopped rather than at a date boundary.
+- `get_item` returns the item's **full text**, which is often 50-200KB and will blow up context.
+  When the tool result gets persisted to a file, read only the **first ~16-22 lines** — title,
+  author, source, URL, tags, captured, summary, and key points all live in that header. Never read
+  the whole file just to write a one-sentence blurb.
 - Deduplicate (same URL or same title), skip items with no URL or broken titles (e.g., "Just a moment...")
+- Metadata is AI-extracted and sometimes wrong. Sanity-check the author against the domain
+  (a `world.hey.com/dhh` post is DHH, whatever the author field says) and flag mismatches.
+
+**Clean the URLs before they reach the post:**
+- Strip Substack/newsletter tracking params (`?isFreemail=`, `post_id=`, `publication_id=`, `r=`,
+  `triedRedirect=`, `token=`) — keep only the bare `/p/slug`
+- Resolve `share.google/...` redirects to the real canonical URL and verify the title matches
+- Prefer the canonical `youtube.com/watch?v=ID` over `youtube.com/watch?is=...&v=ID`
 
 ### Step 3: Generate Commentary (Interactive)
 
@@ -128,24 +140,27 @@ The bakery post uses these Ghost Lexical node types:
 
 ## js-notes API Access
 
-- **Endpoint**: `POST https://notes.verynormal.dev/mcp` (JSON-RPC 2.0)
-- **Auth**: `Authorization: Bearer {token}`
-- **Token retrieval**:
-  ```bash
-  kamal secrets fetch --adapter 1password --account VLVMNHTN7NCBZGTYBDOUCQ5EMU --from keys/js-notes API_TOKEN
-  ```
-- **Initialize session** (required before tool calls):
-  ```json
-  {"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2024-11-05","capabilities":{},"clientInfo":{"name":"bakery","version":"1.0"}}}
-  ```
-- **List items**:
-  ```json
-  {"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"list_recent","arguments":{"limit":50}}}
-  ```
-- **Get item detail**:
-  ```json
-  {"jsonrpc":"2.0","id":3,"method":"tools/call","params":{"name":"get_item","arguments":{"id":ID}}}
-  ```
+**Use the MCP connector tools. The bearer-token curl recipe no longer works.**
+
+`McpController` used to `include TokenAuthentication`, which compared the bearer token against
+`API_TOKEN`. Commit `2fa15ca` (#70, "Add OAuth 2.1 for MCP endpoint (claude.ai integration)",
+2026-04-05) replaced that with `before_action :doorkeeper_authorize!`. Since then `/mcp` accepts
+only Doorkeeper OAuth access tokens and never consults `API_TOKEN`, so hand-rolled curl gets a
+flat `401 {"error":"unauthorized"}`.
+
+The `API_TOKEN` in 1Password (`keys/js-notes`) is still valid — it just authenticates
+`POST /api/items`, `POST /api/items/share`, and the `/login` form. It has no authority on `/mcp`.
+Fetching it for bakery work is wasted effort.
+
+- **Tools**: `mcp__claude_ai_js-notes__list_recent`, `mcp__claude_ai_js-notes__get_item`
+  (also available: `search_knowledge`, `add_note`, `save_url`)
+- **`list_recent`**: `{limit, source_type?, tag?}` — hard cap of 50 results; fan out across
+  `source_type` values to cover a full month
+- **`get_item`**: `{id}` — returns full text; read only the header lines (see Step 2)
+- There is **no update tool**. Correcting a field like `author` means a runner on the box:
+  `kamal app exec --reuse 'bin/rails runner "..."'` from `~/code/js-notes` (needs the
+  `google_compute_engine` SSH key loaded via `ssh-add`). The web `items#update` action only
+  permits `:notes` and `:url`.
 
 ## Example
 
