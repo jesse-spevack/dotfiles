@@ -8,6 +8,12 @@ nvim/.config/nvim/lazyvim.json
 # Tmux plugin manager plugins (managed by tpm)
 tmux/.config/tmux/plugins/
 
+# Herdr runtime state — belt and braces. herdr is not stowed (see README), so
+# these should never appear here, but a stray `stow herdr` would fold the
+# directory and drop sockets and logs straight into the repo.
+herdr/.config/herdr/*
+!herdr/.config/herdr/config.toml
+
 # SSH keys and sensitive files — deny everything in ssh/.ssh, only `config` is shareable
 ssh/.ssh/*
 !ssh/.ssh/config

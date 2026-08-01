@@ -5,7 +5,7 @@
 set -euo pipefail
 
 DOTFILES_DIR="${DOTFILES_DIR:-$HOME/dotfiles}"
-PACKAGES=(zsh git tmux herdr nvim ghostty starship ssh)
+PACKAGES=(zsh git tmux nvim ghostty starship ssh)
 
 log() { printf "\n\033[1;34m==>\033[0m %s\n" "$*"; }
 
@@ -126,6 +126,26 @@ for leaf in skills commands CLAUDE.md settings.json rails-conventions.md code-co
   fi
   ln -sfn "$CLAUDE_SRC/$leaf" "$target"
 done
+
+# 8b. Herdr config (~/.config/herdr)
+# Same shape as ~/.ssh and ~/.claude: herdr keeps live runtime state next to
+# its config - herdr.sock, herdr-client.sock, herdr.log, herdr-server.log,
+# herdr-client.log, .plugins.lock. `stow herdr` folds the whole directory into
+# a symlink when ~/.config/herdr does not exist yet, which puts every one of
+# those files inside this git repo. So herdr is deliberately NOT in PACKAGES;
+# only config.toml is linked. Idempotent.
+log "Linking herdr config into ~/.config/herdr"
+if [[ -L "$HOME/.config/herdr" ]]; then
+  log "Migrating ~/.config/herdr from directory symlink to real directory"
+  rm "$HOME/.config/herdr"
+fi
+mkdir -p "$HOME/.config/herdr"
+herdr_target="$HOME/.config/herdr/config.toml"
+if [[ -e "$herdr_target" && ! -L "$herdr_target" ]]; then
+  mv "$herdr_target" "$herdr_target.backup.$TS"
+  log "Backed up $herdr_target -> $herdr_target.backup.$TS"
+fi
+ln -sfn "$DOTFILES_DIR/herdr/.config/herdr/config.toml" "$herdr_target"
 
 # 9. Herdr agent-state hook for Claude Code
 # The hook script is generated per-machine and is not tracked here, so it has
