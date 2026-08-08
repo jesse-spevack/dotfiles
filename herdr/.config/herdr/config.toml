@@ -22,10 +22,14 @@ new_cwd = "follow"
 prefix = "ctrl+a"
 
 # --- Ergodox F-key layer (no prefix), carried over from tmux ---
-# F1 has no herdr equivalent: herdr is mouse-native, drag-select copies
-# directly, so there is no copy-mode to enter. F1 opens the scrollback in
-# $EDITOR instead, which is the closest analog.
-edit_scrollback = ["prefix+e", "f1"]
+# F1 = copy mode (tmux copy-mode). herdr keeps the tmux default on prefix+[
+# and the copy-mode keys are vi-style: hjkl/wbe to move, / and ? to search,
+# v or space to select, y or enter to copy, q or esc to leave.
+copy_mode = ["prefix+[", "f1"]
+
+# Dump the pane scrollback into $EDITOR. tmux had no equivalent; this is the
+# escape hatch when a selection is too long to drag or search by hand.
+edit_scrollback = "prefix+e"
 
 # F2 = split right (tmux split-window -h), F3 = split down (tmux -v)
 split_vertical = ["prefix+v", "f2"]
