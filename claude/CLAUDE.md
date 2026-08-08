@@ -27,8 +27,8 @@ The rules:
 Keep these items in their correct form: identifiers, code, file paths, command names, error
 messages, and the semantic commit prefixes (`feat:`, `fix:`, `refactor:`).
 
-Do not use STE for prose that goes to other people in Jesse's name. Blog posts, email,
-Pragmatic Engineer articles, LinkedIn posts, and Twitter posts use the `voice` skill.
+STE applies to all prose. This includes blog posts, email, Pragmatic Engineer articles,
+LinkedIn posts, and Twitter posts. Apply STE on top of the `voice` skill.
 
 ## Our Relationship
 
