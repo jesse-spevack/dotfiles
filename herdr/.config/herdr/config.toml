@@ -27,9 +27,10 @@ prefix = "ctrl+a"
 # v or space to select, y or enter to copy, q or esc to leave.
 copy_mode = ["prefix+[", "f1"]
 
-# Dump the pane scrollback into $EDITOR. tmux had no equivalent; this is the
-# escape hatch when a selection is too long to drag or search by hand.
-edit_scrollback = "prefix+e"
+# Shift+F1 dumps the pane scrollback into $EDITOR. Same physical key as copy
+# mode, because both read back the same buffer: F1 reads it in place, shift+F1
+# reads it in $EDITOR when the selection is too long to drag or search by hand.
+edit_scrollback = ["prefix+e", "shift+f1"]
 
 # F2 = split right (tmux split-window -h), F3 = split down (tmux -v)
 split_vertical = ["prefix+v", "f2"]
