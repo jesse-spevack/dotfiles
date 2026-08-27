@@ -1,7 +1,8 @@
 {
   "enabledPlugins": {
     "planbridge@contextbridge": true,
-    "vercel@claude-plugins-official": false
+    "vercel@claude-plugins-official": false,
+    "hey@37signals": true
   },
   "permissions": {
     "defaultMode": "auto"
@@ -25,5 +26,16 @@
         ]
       }
     ]
-  }
+  },
+  "model": "claude-fable-5[1m]",
+  "extraKnownMarketplaces": {
+    "37signals": {
+      "source": {
+        "source": "github",
+        "repo": "basecamp/claude-plugins"
+      },
+      "autoUpdate": true
+    }
+  },
+  "outputStyle": "Concise"
 }
