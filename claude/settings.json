@@ -25,6 +25,18 @@
           }
         ]
       }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$HOME/.claude/hooks/block-wildcard-staging.sh\"",
+            "timeout": 10
+          }
+        ]
+      }
     ]
   },
   "model": "claude-fable-5[1m]",

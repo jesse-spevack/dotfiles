@@ -118,7 +118,8 @@ stow --restow --target="$HOME" "${PACKAGES[@]}"
 log "Linking Claude Code config into ~/.claude"
 mkdir -p "$HOME/.claude"
 CLAUDE_SRC="$DOTFILES_DIR/claude"
-for leaf in skills commands CLAUDE.md settings.json rails-conventions.md code-conventions.md; do
+mkdir -p "$HOME/.claude/hooks"
+for leaf in skills commands CLAUDE.md settings.json rails-conventions.md code-conventions.md hooks/block-wildcard-staging.sh; do
   target="$HOME/.claude/$leaf"
   if [[ -e "$target" && ! -L "$target" ]]; then
     mv "$target" "$target.backup.$TS"
