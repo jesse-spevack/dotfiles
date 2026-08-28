@@ -38,6 +38,7 @@ brew "pnpm"
 # ---- Cloud / secrets ----
 cask "google-cloud-sdk"
 cask "1password-cli"
+brew "gitleaks"
 
 # ---- Terminal + font ----
 cask "ghostty"

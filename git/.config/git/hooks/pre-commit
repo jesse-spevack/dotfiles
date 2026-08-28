@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# Global pre-commit: block key files and scan staged changes for secrets.
+set -e
+
+staged=$(git diff --cached --name-only --diff-filter=ACM)
+
+if printf '%s\n' "$staged" | grep -qE '(^|/)(config/.*\.key|\.env(\..*)?|.*\.pem|id_(rsa|ed25519|ecdsa))$'; then
+  echo "pre-commit: refusing to commit a key or env file:" >&2
+  printf '%s\n' "$staged" | grep -E '(^|/)(config/.*\.key|\.env(\..*)?|.*\.pem|id_(rsa|ed25519|ecdsa))$' >&2
+  exit 1
+fi
+
+if command -v gitleaks >/dev/null 2>&1; then
+  gitleaks git --pre-commit --staged --redact --no-banner
+else
+  echo "pre-commit: gitleaks not installed, skipped secret scan (brew install gitleaks)" >&2
+fi
+
+repo_hook="$(git rev-parse --git-dir)/hooks/pre-commit"
+if [ -x "$repo_hook" ] && [ "$repo_hook" -ef "$0" ]; then :; elif [ -x "$repo_hook" ]; then
+  exec "$repo_hook" "$@"
+fi
