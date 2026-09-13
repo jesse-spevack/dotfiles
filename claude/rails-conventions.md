@@ -4,6 +4,8 @@ These conventions apply to all Rails projects under ~/code/.
 
 ## Services
 
+**Services are for work that does something.** A service crosses a boundary (network, process, another system), has side effects, or orchestrates several steps. Query scopes and persistence rules for one model live in a model concern (`Item::Searchable`). Pure transformations of data are noun value objects (`Search::Query`). Reference: 37signals' Fizzy.
+
 **Verb-first naming.** Services describe what they do: `CreatesUrlEpisode`, `ChecksRateLimit`, `GeneratesAudio`. Not `EpisodeService`, `AudioTranscriber`, `Enricher`.
 
 **`.call` class method entry point.** Every service follows this pattern:

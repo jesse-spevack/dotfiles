@@ -1,18 +1,8 @@
 {
-  "enabledPlugins": {
-    "planbridge@contextbridge": true,
-    "vercel@claude-plugins-official": false,
-    "hey@37signals": true
-  },
   "permissions": {
     "defaultMode": "auto"
   },
-  "fastMode": true,
-  "tui": "default",
-  "skipDangerousModePermissionPrompt": true,
-  "theme": "dark",
-  "agentPushNotifEnabled": true,
-  "skipAutoPermissionPrompt": true,
+  "model": "claude-fable-5-1[1m]",
   "hooks": {
     "SessionStart": [
       {
@@ -39,7 +29,11 @@
       }
     ]
   },
-  "model": "claude-fable-5[1m]",
+  "enabledPlugins": {
+    "planbridge@contextbridge": true,
+    "vercel@claude-plugins-official": false,
+    "hey@37signals": true
+  },
   "extraKnownMarketplaces": {
     "37signals": {
       "source": {
@@ -49,5 +43,17 @@
       "autoUpdate": true
     }
   },
-  "outputStyle": "Concise"
+  "outputStyle": "Concise",
+  "fastMode": true,
+  "tui": "default",
+  "skipDangerousModePermissionPrompt": true,
+  "theme": "dark",
+  "inputNeededNotifEnabled": true,
+  "agentPushNotifEnabled": true,
+  "skipAutoPermissionPrompt": true,
+  "attribution": {
+    "commit": "",
+    "pr": "",
+    "sessionUrl": false
+  }
 }

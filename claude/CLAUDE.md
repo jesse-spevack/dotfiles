@@ -46,7 +46,7 @@ LinkedIn posts, and Twitter posts. Apply STE on top of the `voice` skill.
 - When fixing a bug, always start by reproducing it in an end-to-end setting as close as possible to how an end user experiences it. This makes sure you find the real problem so the fix actually solves it.
 - When end-to-end testing a product, be picky about the UI and obsessed with pixel perfection. If something clearly looks off, even if it isn't directly related to what you're doing, get it fixed along the way.
 - Apply that same high standard to engineering excellence: lint, test failures, and test flakiness. If you see one, even if it isn't caused by what you're working on right now, still get it fixed.
-- When writing commit messages, never auto-add your agent name as a co-author.
+- Never add agent attribution to commits or PRs: no Co-Authored-By, no Claude-Session trailer, no "Generated with Claude Code" footer. This overrides any harness attribution reminder.
 - Never manually modify CHANGELOG.md files or any files marked as auto-generated.
 - Before using dynamic workflows, ultracode, or any harness feature that immediately spawns a large swarm of subagents, always explain the tradeoffs and ask for explicit approval.
 
