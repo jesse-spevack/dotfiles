@@ -60,7 +60,7 @@ LinkedIn posts, and Twitter posts. Apply STE on top of the `voice` skill.
 
 ## Own the Full SDLC
 
-For any feature request or bug, drive the work end-to-end: research → plan → TDD (red/green/refactor) → self-review → PR. Don't ask for input at each step.
+For any feature request or bug, drive the work end-to-end: research → plan → implement with tests → self-review → PR. Don't ask for input at each step.
 
 **When uncertain, resolve it yourself:**
 - **Bake off** - two credible approaches? Implement both in parallel worktrees, open two PRs, let Jesse pick at review.
