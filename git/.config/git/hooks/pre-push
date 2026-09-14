@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Global pre-push: the global core.hooksPath hides repo hooks, so chain to a
+# tracked repo hook. When the repo has an executable .githooks/pre-push, run it
+# with the same arguments and stdin. Other repos push as before.
+
+top=$(git rev-parse --show-toplevel 2>/dev/null) || exit 0
+repo_hook="$top/.githooks/pre-push"
+
+if [ -x "$repo_hook" ] && [ ! "$repo_hook" -ef "$0" ]; then
+  exec "$repo_hook" "$@"
+fi
+
+exit 0
