@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# Global pre-push: the global core.hooksPath hides repo hooks, so chain to a
-# tracked repo hook. When the repo has an executable .githooks/pre-push, run it
-# with the same arguments and stdin. Other repos push as before.
+# Global pre-push: the global core.hooksPath hides repo hooks, so chain to the
+# untracked repo hook, the same as pre-commit. A tracked hook runs only after a
+# local install step writes that file.
 
-top=$(git rev-parse --show-toplevel 2>/dev/null) || exit 0
-repo_hook="$top/.githooks/pre-push"
+common_dir=$(git rev-parse --path-format=absolute --git-common-dir 2>/dev/null) || exit 0
+repo_hook="$common_dir/hooks/pre-push"
 
 if [ -x "$repo_hook" ] && [ ! "$repo_hook" -ef "$0" ]; then
   exec "$repo_hook" "$@"
