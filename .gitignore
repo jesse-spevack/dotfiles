@@ -25,3 +25,9 @@ ssh/.ssh/*
 *.swp
 *.swo
 *~
+
+# Claude Code runtime state. ~/.claude/skills links to claude/skills, so
+# tool installs and skill sync write into the repo.
+.claude/
+claude/skills/synced/
+claude/skills/hey
