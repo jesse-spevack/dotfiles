@@ -81,3 +81,6 @@ export PATH="$HOME/.local/bin:$PATH"
 [ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"
 
 alias lfg="claude --dangerously-skip-permissions"
+
+# 1Password service account token from the macOS keychain
+export OP_SERVICE_ACCOUNT_TOKEN="$(security find-generic-password -s op-service-account -w)"
