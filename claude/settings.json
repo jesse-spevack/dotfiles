@@ -55,5 +55,6 @@
     "commit": "",
     "pr": "",
     "sessionUrl": false
-  }
+  },
+  "autoCompactEnabled": false
 }
