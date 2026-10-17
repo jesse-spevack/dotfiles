@@ -56,5 +56,5 @@
     "pr": "",
     "sessionUrl": false
   },
-  "autoCompactEnabled": false
+  "autoCompactEnabled": true
 }
