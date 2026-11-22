@@ -2,7 +2,7 @@
   "permissions": {
     "defaultMode": "auto"
   },
-  "model": "claude-fable-5-1[1m]",
+  "model": "opus",
   "hooks": {
     "SessionStart": [
       {
@@ -12,6 +12,15 @@
             "type": "command",
             "command": "bash \"$HOME/.claude/hooks/herdr-agent-state.sh\" session",
             "timeout": 10
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/bin/sh -c 'rex __internal session-start --agent claude 2>/dev/null || true'",
+            "timeout": 5
           }
         ]
       }
@@ -32,7 +41,8 @@
   "enabledPlugins": {
     "planbridge@contextbridge": true,
     "vercel@claude-plugins-official": false,
-    "hey@37signals": true
+    "hey@37signals": true,
+    "typesafe@typesafe-ai": true
   },
   "extraKnownMarketplaces": {
     "37signals": {
@@ -41,10 +51,21 @@
         "repo": "basecamp/claude-plugins"
       },
       "autoUpdate": true
+    },
+    "typesafe-ai": {
+      "source": {
+        "source": "github",
+        "repo": "typesafe-ai/skills"
+      }
+    },
+    "contextbridge": {
+      "source": {
+        "source": "github",
+        "repo": "contextbridge/claude-plugin"
+      }
     }
   },
   "outputStyle": "Concise",
-  "fastMode": true,
   "tui": "default",
   "skipDangerousModePermissionPrompt": true,
   "theme": "dark",
@@ -56,5 +77,10 @@
     "pr": "",
     "sessionUrl": false
   },
-  "autoCompactEnabled": true
+  "autoCompactEnabled": true,
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "high"
+    }
+  }
 }

@@ -35,3 +35,5 @@ ssh/.ssh/*
 .claude/
 claude/skills/synced/
 claude/skills/hey
+# `rex skill setup` writes a stub skill here. The Rex CLI owns it.
+claude/skills/rex/
