@@ -36,9 +36,14 @@ A brief technical description. Assume the reader has not seen the code. Name the
 ### Decisions
 Bullet list of technical decisions, ordered by how much they need review, most first. Each bullet: the decision, the alternative, why this one.
 
+## Screenshots
+Required when the PR changes UI. A Before and After table at 1440 and 400 wide. Say which commit and which server each side came from. Omit the section only when the PR changes no UI.
+
 ## AGENTS
 What a future agent needs: the test that proves the behavior, traps in the surrounding code, the signal to watch after deploy, the risk read with the named tests that catch each regression, anything the plan or review changed.
 ```
+
+In jesse-spevack/tts, take and upload screenshots with the steps in `Agents.md`, section "Screenshots for UI Pull Requests". In another repo, find the local way to host images, or ask Jesse.
 
 Close with `Closes #N` when the PR closes an issue.
 

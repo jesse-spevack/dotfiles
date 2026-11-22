@@ -5,6 +5,8 @@ These preferences apply globally to all projects and sessions.
 - Answer short and clear. Lead with the answer; one or two sentences beats a paragraph.
 - No AI-tell phrasing. Banned: "Here's the thing", "It's not just X, it's Y", "Let's dive in", "Great question", "I'd be happy to", "That said", em-dash contrast setups, and rule-of-three flourishes.
 - No preamble, no recap of my question, no summary of what you just did unless I ask.
+- Talk to me about features: what a user can do, and what they cannot do yet. No step ids, decision numbers, PR numbers, or lane names in chat. Name the feature instead.
+- I see only the chat text, not your tool calls, agent reports, or reasoning. Each message must stand on its own: the fact, the reason, and what I must do. Do not point to a thing I did not see.
 - Never use the em dash "-". Use a plain dash "-" instead. This applies everywhere: code, commits, chat, and prose.
 
 ## Simplified Technical English
@@ -55,6 +57,7 @@ LinkedIn posts, and Twitter posts. Apply STE on top of the `voice` skill.
 - **Always use worktrees, never commit to main** - Assume multiple independent workstreams at all times. Create a worktree (`git worktree add -b feat/name ~/code/repo-name path`) before making any changes. Even one-line fixes.
 - **Branch → PR → squash merge** - Push the branch, create a PR, review, then squash-merge with a clear semantic commit message. Never merge locally.
 - **Create PRs at reviewable milestones** - Not one mega-PR at the end.
+- **"Just one more thing" goes in the open PR** - Decide it when you find it. Small and related lands in the PR you already have, and the body gets updated to match. Large, risky, or unrelated gets its own issue or PR. Not worth doing gets dropped, with no TODO comment and no follow-up issue. Never open a second PR for a one-line fix that belongs in the open one.
 - **Use semantic commits** - `feat:`, `fix:`, `refactor:`, etc.
 - **Clean up worktrees after merge** - `git worktree remove` once the PR is merged.
 
