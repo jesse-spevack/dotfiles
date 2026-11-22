@@ -148,6 +148,26 @@ if [[ -e "$herdr_target" && ! -L "$herdr_target" ]]; then
 fi
 ln -sfn "$DOTFILES_DIR/herdr/.config/herdr/config.toml" "$herdr_target"
 
+# 8c. Rex config (~/.config/rex)
+# Same shape as herdr: Rex writes its own files next to its config, such as
+# .init.lua.backup. So rex is deliberately NOT in PACKAGES; only init.lua is
+# linked into a real ~/.config/rex/ directory. Idempotent.
+log "Linking Rex config into ~/.config/rex"
+if [[ -L "$HOME/.config/rex" ]]; then
+  log "Migrating ~/.config/rex from directory symlink to real directory"
+  rm "$HOME/.config/rex"
+fi
+mkdir -p "$HOME/.config/rex"
+rex_target="$HOME/.config/rex/init.lua"
+if [[ -e "$rex_target" && ! -L "$rex_target" ]]; then
+  mv "$rex_target" "$rex_target.backup.$TS"
+  log "Backed up $rex_target -> $rex_target.backup.$TS"
+fi
+ln -sfn "$DOTFILES_DIR/rex/.config/rex/init.lua" "$rex_target"
+if command -v rex >/dev/null 2>&1; then
+  rex config reload || true
+fi
+
 # 9. Herdr agent-state hook for Claude Code
 # The hook script is generated per-machine and is not tracked here, so it has
 # to come from `herdr integration install claude`. That installer also writes

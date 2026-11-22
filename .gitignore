@@ -14,6 +14,10 @@ tmux/.config/tmux/plugins/
 herdr/.config/herdr/*
 !herdr/.config/herdr/config.toml
 
+# Rex writes its own files next to init.lua. rex is not stowed (see README).
+rex/.config/rex/*
+!rex/.config/rex/init.lua
+
 # SSH keys and sensitive files — deny everything in ssh/.ssh, only `config` is shareable
 ssh/.ssh/*
 !ssh/.ssh/config

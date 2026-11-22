@@ -9,6 +9,8 @@ Modern dotfiles managed with GNU Stow for easy installation and maintenance acro
 - **tmux** - tmux terminal multiplexer with Catppuccin theme
 - **herdr** - Agent multiplexer, keybindings mirrored from the tmux config
   (not stowed - `bootstrap.sh` links `config.toml` on its own, see below)
+- **rex** - Rex terminal multiplexer keybindings, migrated from tmux, Herdr and Ghostty
+  (not stowed - `bootstrap.sh` links `init.lua` on its own, see below)
 - **nvim** - Neovim with LazyVim setup
 - **ghostty** - Ghostty terminal emulator
 - **starship** - Cross-shell prompt
@@ -157,6 +159,9 @@ dotfiles/
   not already exist - which puts sockets and logs inside this repo. Same class
   of problem as the old `stow ssh` behaviour. `bootstrap.sh` links only
   `config.toml` into a real `~/.config/herdr/` directory.
+- `rex` is excluded from `stow` for the same reason. Rex writes its own files
+  (such as `.init.lua.backup`) in `~/.config/rex`. `bootstrap.sh` links only
+  `init.lua` into a real `~/.config/rex/` directory.
 - SSH keys are not tracked (see `.gitignore`)
 - Generated files like `lazy-lock.json` are excluded
 - Old dotfiles from previous setup are in `old/` directory
